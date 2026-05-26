@@ -686,50 +686,61 @@
             animation: sealDown 0.85s ease-out forwards;
         }
 
-        .flow-line {
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 0.5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: repeating-linear-gradient(90deg, var(--color-secondary) 0 4px, transparent 4px 9px);
-            opacity: 0.35;
+        /* 全链路回看：第五–八阶段右上角返回（top/right 16dp，线宽 1.2px，#B3A38D） */
+        #page-reading .phase-back-btn,
+        #page-archive .phase-back-btn,
+        #page-end .phase-back-btn {
+            position: absolute !important;
+            top: 16px !important;
+            right: 16px !important;
+            z-index: 50 !important;
+            width: 36px !important;
+            height: 36px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            color: #B3A38D !important;
+            opacity: 0.4 !important;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: opacity 0.25s ease !important;
+            -webkit-tap-highlight-color: transparent !important;
         }
 
-        .flow-line.lit {
-            background: linear-gradient(90deg, var(--color-secondary), color-mix(in srgb, var(--color-secondary) 40%, transparent));
-            opacity: 0.75;
+        #page-reading .phase-back-btn:hover,
+        #page-reading .phase-back-btn:active,
+        #page-reading .phase-back-btn:focus-visible,
+        #page-reading .phase-back-btn.phase-back-lit,
+        #page-archive .phase-back-btn:hover,
+        #page-archive .phase-back-btn:active,
+        #page-archive .phase-back-btn:focus-visible,
+        #page-archive .phase-back-btn.phase-back-lit,
+        #page-end .phase-back-btn:hover,
+        #page-end .phase-back-btn:active,
+        #page-end .phase-back-btn:focus-visible,
+        #page-end .phase-back-btn.phase-back-lit {
+            opacity: 0.9 !important;
         }
 
-        .light-point {
-            position: absolute;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--color-primary);
-            box-shadow: 0 0 10px var(--color-secondary);
-            cursor: pointer;
-            transition: left 2.8s cubic-bezier(0.25, 0.8, 0.25, 1), top 1s ease;
+        #page-reading .phase-back-btn svg,
+        #page-archive .phase-back-btn svg,
+        #page-end .phase-back-btn svg {
+            display: block !important;
+            width: 20px !important;
+            height: 20px !important;
         }
 
-        .point-tip {
-            position: absolute;
-            bottom: 140%;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: 12px;
-            color: var(--color-primary);
-            opacity: 0;
-            transition: opacity 0.25s ease;
-            pointer-events: none;
-            padding: 4px 8px;
-            border: 1px solid color-mix(in srgb, var(--color-secondary) 50%, transparent);
-        }
-
-        .light-point.show-tip .point-tip {
-            opacity: 1;
+        #page-reading .phase-back-btn svg path,
+        #page-archive .phase-back-btn svg path,
+        #page-end .phase-back-btn svg path {
+            stroke: #B3A38D !important;
+            stroke-width: 1.2 !important;
+            stroke-linecap: round !important;
+            stroke-linejoin: round !important;
         }
 
         .hidden {
@@ -800,200 +811,324 @@
             opacity: 1;
         }
 
-        #reading-p1 #explore-btn {
-            position: relative;
-            bottom: auto;
-            margin-top: 12px;
-            margin-bottom: max(8px, env(safe-area-inset-bottom, 0px));
-            flex-shrink: 0;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+        /* 第五阶段：解读页 1:1 像素规范（仅 #page-reading） */
+        #page-reading {
+            background: #606060 !important;
+            color: #D8D0BE !important;
+            text-align: center !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
         }
 
-        .interpret-panel {
-            position: absolute;
-            inset: 0;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        #page-reading #reading-p3.interpret-panel-read3 {
+            padding-top: 0 !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+            overflow: hidden !important;
         }
 
-        /* 解读第一屏：上 40% 牌阵，下 60% 文案，禁止滚动 */
-        .interpret-panel-reading1 {
-            padding: 16px;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            box-sizing: border-box;
-            justify-content: flex-start;
+        #page-reading .interpret-panel {
+            position: absolute !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            box-sizing: border-box !important;
         }
 
-        .interpret-panel-reading1 .reading-mini {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            flex: 0 0 40%;
-            max-height: 40vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+        #page-reading .interpret-panel-reading1,
+        #page-reading .interpret-panel-reading2 {
+            justify-content: center !important;
+            padding-top: 0 !important;
+            padding-bottom: 120px !important;
+            box-sizing: border-box !important;
         }
 
-        .interpret-panel-reading1 .interpret-text-reading1 {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            flex: 1 1 0;
-            min-height: 0;
-            width: 85%;
-            max-width: 360px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-primary);
-            cursor: pointer;
+        /* 切屏：第二层/第三层淡入，第一层内容收起仅留底部按钮 */
+        #page-reading #reading-p2,
+        #page-reading #reading-p3 {
+            display: flex !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: opacity 0.6s ease, visibility 0.6s ease !important;
+            z-index: 1 !important;
         }
 
-        .interpret-panel-reading1 .read1-body-wrap {
-            flex: 1 1 0;
-            min-height: 0;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+        #page-reading #reading-p2.reading-layer-active,
+        #page-reading #reading-p3.reading-layer-active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            z-index: 5 !important;
         }
 
-        .interpret-panel-reading1 #read1-body {
-            width: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            text-align: center;
-            word-break: break-word;
-            overflow-wrap: anywhere;
+        #page-reading #reading-p1 {
+            z-index: 2 !important;
         }
 
-        .interpret-panel-reading1 .read-layer-title {
-            flex-shrink: 0;
-            margin-bottom: 16px;
-            width: 100%;
+        #page-reading #reading-p1.reading-p1-shelled {
+            display: flex !important;
+            pointer-events: none !important;
+            z-index: 30 !important;
         }
 
-        .reading-mini {
-            position: absolute;
-            top: 8%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        #page-reading #reading-p1.reading-p1-shelled .reading-mini,
+        #page-reading #reading-p1.reading-p1-shelled .interpret-text-reading1,
+        #page-reading #reading-p1.reading-p1-shelled .read1-next-hint {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
         }
 
-        .interpret-text {
-            position: absolute;
-            top: 42%;
-            left: 50%;
-            transform: translate(-50%, 0);
-            width: 88%;
-            max-width: 360px;
-            min-height: 52vh;
-            text-align: center;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-primary);
-            cursor: pointer;
+        #page-reading #explore-btn {
+            position: absolute !important;
+            bottom: 80px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 30 !important;
+            margin: 0 !important;
+            flex-shrink: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.6s ease !important;
         }
 
-        .interpret-text.phase2 {
-            top: 40%;
+        #page-reading #explore-btn.reading-nav-visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
-        /* 解读第二屏：牌阵在上，文案区居中，85% 宽，16px 间距 */
-        .interpret-panel-reading2 {
-            padding: 16px;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            box-sizing: border-box;
-            justify-content: flex-start;
+        #page-reading .reading-mini {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            flex: 4 0 0 !important;
+            width: 100% !important;
+            max-width: 430px !important;
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 16px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
         }
 
-        .interpret-panel-reading2 .reading-mini {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            flex: 0 0 34%;
-            max-height: 34vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+        #page-reading .interpret-text-reading1,
+        #page-reading .interpret-text-reading2 {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            flex: 6 0 0 !important;
+            width: 311px !important;
+            max-width: 311px !important;
+            min-width: 311px !important;
+            min-height: 200px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            overflow: hidden !important;
+            padding: 0 16px !important;
+            margin: 0 !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 1.8 !important;
+            letter-spacing: 0.5px !important;
+            color: #D8D0BE !important;
+            cursor: pointer !important;
+            box-sizing: border-box !important;
         }
 
-        .interpret-panel-reading2 .interpret-text.phase2 {
-            top: auto;
-            transform: none;
+        /* 第五阶段第一屏：最后一行文案与「探寻关联」间距 32px（按钮 bottom:80px、高 44px 不变） */
+        #page-reading #reading-p1 .interpret-text-reading1 {
+            padding-top: 0 !important;
+            padding-right: 16px !important;
+            padding-bottom: 156px !important;
+            padding-left: 16px !important;
+            box-sizing: border-box !important;
         }
 
-        .interpret-panel-reading2 .interpret-text-reading2 {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            flex: 1 1 0;
-            min-height: 0;
-            width: 85%;
-            max-width: 360px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            overflow: hidden;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-primary);
-            cursor: pointer;
+        #page-reading .interpret-panel-reading2 .interpret-text-reading2 {
+            justify-content: center !important;
+            cursor: pointer !important;
+            width: 85% !important;
+            max-width: 85% !important;
+            min-width: 0 !important;
+            position: relative !important;
+            top: -36px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 18px !important;
         }
 
-        .interpret-panel-reading2 .read-layer-title {
-            flex-shrink: 0;
-            margin-bottom: 16px;
-            width: 100%;
+        #page-reading .interpret-panel-reading2 #read2-body {
+            width: 100% !important;
         }
 
-        .interpret-panel-reading2 #read2-body {
-            flex: 1 1 0;
-            min-height: 0;
-            width: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            text-align: center;
-            word-break: break-word;
-            overflow-wrap: anywhere;
+        #page-reading #reading-p3.interpret-panel-read3 {
+            padding: 0 !important;
+            overflow: hidden !important;
         }
 
-        .interpret-wide {
-            width: 85%;
-            max-width: 360px;
-            text-align: center;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-primary);
-            cursor: pointer;
+        #page-reading #reading-p3 .interpret-final-wrap.read3-meditation {
+            height: 100% !important;
+            max-height: 100vh !important;
+            overflow: hidden !important;
+            padding-top: 48px !important;
+            box-sizing: border-box !important;
+        }
+
+        #page-reading #read3-float {
+            height: 100% !important;
+            max-height: 100% !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        #page-reading .read-layer-title,
+        #page-reading #read1-body,
+        #page-reading #read2-body,
+        #page-reading .reveal-char {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 1.8 !important;
+            letter-spacing: 0.5px !important;
+            color: #D8D0BE !important;
+            text-align: center !important;
+        }
+
+        #page-reading .read-layer-title {
+            flex-shrink: 0 !important;
+            width: 100% !important;
+            margin: 0 0 16px 0 !important;
+            padding: 0 !important;
+            font-weight: 600 !important;
+        }
+
+        #page-reading .read1-body-wrap {
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        #page-reading #read1-body,
+        #page-reading #read2-body {
+            width: 100% !important;
+            max-height: 100% !important;
+            overflow: hidden !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        #page-reading .reading-mini .tarot-card {
+            width: 58px !important;
+            height: 93px !important;
+            min-width: 58px !important;
+            min-height: 93px !important;
+            max-width: 58px !important;
+            max-height: 93px !important;
+            border-radius: 2px !important;
+            border: 1px solid transparent !important;
+            padding: 6px 4px !important;
+            margin: 0 !important;
+            animation: none !important;
+            box-shadow: none !important;
+            transition: background-color 0.5s ease, opacity 0.5s ease !important;
+            background-color: #D8D0BE !important;
+            opacity: 0.3 !important;
+        }
+
+        #page-reading .reading-mini .tarot-card .name-cn {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 29px !important;
+            letter-spacing: 0.5px !important;
+            color: #D8D0BE !important;
+            margin: 0 0 4px 0 !important;
+        }
+
+        #page-reading .reading-mini .tarot-card.reading-card-inactive {
+            background-color: #D8D0BE !important;
+            opacity: 0.3 !important;
+        }
+
+        #page-reading .reading-mini .tarot-card.reading-card-active {
+            background-color: #B3A38D !important;
+            opacity: 1 !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 14px color-mix(in srgb, #B3A38D 28%, transparent) !important;
+        }
+
+        #page-reading .reading-mini .tarot-card.reading-card-lit {
+            background-color: #B3A38D !important;
+            opacity: 1 !important;
+            box-shadow: none !important;
+        }
+
+        #page-reading .read1-next-hint {
+            position: absolute !important;
+            right: 28px !important;
+            bottom: 108px !important;
+            z-index: 28 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.55s ease !important;
+        }
+
+        #page-reading .read1-next-hint.read1-next-visible {
+            opacity: 1 !important;
+        }
+
+        #page-reading .read1-next-arrow {
+            display: block !important;
+            font-family: "Cormorant Garamond", serif !important;
+            font-size: 22px !important;
+            line-height: 1 !important;
+            color: #B3A38D !important;
+            text-shadow: 0 0 10px color-mix(in srgb, #B3A38D 55%, transparent), 0 0 22px color-mix(in srgb, #B3A38D 25%, transparent) !important;
+            animation: read1NextGlow 2.2s ease-in-out infinite alternate !important;
+        }
+
+        @keyframes read1NextGlow {
+            from { opacity: 0.45; transform: translateX(0); }
+            to { opacity: 0.95; transform: translateX(3px); }
+        }
+
+        #page-reading .highlight-name {
+            color: #B3A38D !important;
+            font-weight: 700 !important;
+        }
+
+        #page-reading .interpret-panel-read3 .read3-meditation {
+            cursor: default !important;
         }
 
         .interpret-final-wrap {
@@ -1027,9 +1162,7 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            background:
-                radial-gradient(ellipse 95% 88% at 50% 18%, rgba(118, 116, 112, 0.55) 0%, rgba(72, 72, 72, 0.92) 42%, rgba(10, 10, 10, 0.98) 100%),
-                #606060;
+            background: linear-gradient(180deg, #404040 0%, #2a2a2a 55%, #202020 100%);
             transition: background 1.35s ease, filter 1.35s ease;
         }
 
@@ -1164,12 +1297,13 @@
         }
 
         #read3-float.read3-float-idle {
-            animation: read3FloatDrift 30s ease-in-out infinite;
+            animation: read3FloatDrift 6s ease-in-out infinite !important;
         }
 
         @keyframes read3FloatDrift {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(2px, -4px); }
+            66% { transform: translate(-3px, -5px); }
         }
 
         .read3-click-ripples {
@@ -1199,32 +1333,32 @@
 
         .interpret-final.read3-text.read3-flow-layout {
             position: relative;
-            width: 75%;
-            max-width: 320px;
-            max-height: calc(100% - 24px);
+            width: 86%;
+            max-width: 340px;
+            max-height: calc(100% - 32px);
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 16px 0;
             box-sizing: border-box;
-            font-size: 20px;
-            line-height: 2.5;
-            letter-spacing: 0.2em;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+            font-size: 16px;
+            line-height: 1.8;
+            letter-spacing: 0.08em;
             color: #D8D0BE;
-            overflow-x: hidden;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: stretch;
             justify-content: center;
-            gap: 1.25em;
+            gap: 1.1em;
         }
 
         .read3-flow-layout .read3-para {
             position: relative;
             margin: 0;
             width: 100%;
-            line-height: 2.5;
-            letter-spacing: 0.2em;
+            font-size: 16px;
+            line-height: 1.8;
+            letter-spacing: 0.08em;
             color: #D8D0BE;
             word-break: break-word;
             overflow-wrap: anywhere;
@@ -1287,8 +1421,8 @@
             color: transparent;
             -webkit-text-fill-color: transparent;
             animation: read3InkFlow 7.5s ease-in-out infinite;
-            line-height: 2.5;
-            letter-spacing: 0.2em;
+            line-height: 1.8;
+            letter-spacing: 0.08em;
         }
 
         .read3-text.read3-text--full .read3-para .read3-kw {
@@ -1449,200 +1583,530 @@
             padding: 2rem;
         }
 
-        #archive-emotional-text {
-            width: 90%;
-            max-width: 340px;
-            margin: 0 auto;
-            padding: 0 12px;
-            box-sizing: border-box;
-            text-align: center;
-            font-size: 16px;
-            line-height: 1.6;
-            letter-spacing: 0.1em;
-            color: #D8D0BE;
-            cursor: pointer;
-            word-break: break-word;
-            overflow-wrap: anywhere;
-        }
-
-        .naming-load-txt {
-            font-size: 16px;
-            color: #D8D0BE;
-            opacity: 0.65;
-            line-height: 1.6;
-            text-align: center;
-        }
-
+        /* ---------- 第六阶段：情绪承接页 ---------- */
         #page-archive {
-            background: #606060;
+            background: #606060 !important;
+            overflow: hidden !important;
+            padding: 0 !important;
         }
 
-        .naming-block {
-            text-align: center;
-            width: 100%;
-            max-width: 100%;
-            flex: 1;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            padding-bottom: 200px;
-            box-sizing: border-box;
+        #archive-emotional.archive-emotional-scene {
+            position: absolute !important;
+            inset: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0 48px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+            background: #606060 !important;
         }
 
+        #archive-emotional-text.emotional-bridge-text {
+            width: 100% !important;
+            max-width: 332px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            line-height: 2.2em !important;
+            letter-spacing: 0.2em !important;
+            color: #D8D0BE !important;
+            cursor: pointer !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+            border: none !important;
+            background: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        #archive-emotional-text .reveal-char.emotional-char {
+            opacity: 0 !important;
+            animation: emotionalRevealChar 0.28s ease forwards !important;
+        }
+
+        @keyframes emotionalRevealChar {
+            from {
+                opacity: 0 !important;
+                transform: translateY(5px) !important;
+            }
+            to {
+                opacity: 0.9 !important;
+                transform: translateY(0) !important;
+            }
+        }
+
+        #archive-emotional-text.emotional-bridge-done {
+            opacity: 0.9 !important;
+        }
+
+        #archive-emotional-text.emotional-breathe {
+            animation: emotionalBreathe 4s ease-in-out infinite !important;
+        }
+
+        @keyframes emotionalBreathe {
+            0%, 100% { opacity: 0.7 !important; }
+            50% { opacity: 0.9 !important; }
+        }
+
+        /* ---------- 第七阶段：共识命名页 ---------- */
         #archive-naming.archive-scene {
-            justify-content: flex-start;
-            padding-top: 20px;
-            padding-bottom: 0;
-            background: #606060;
+            background: #606060 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
 
-        .naming-main-stack {
-            width: 100%;
-            max-width: 340px;
-            flex: 1 1 auto;
-            min-height: 0;
-            max-height: 70vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin: 0 auto;
-            padding: 0 16px 8px;
-            box-sizing: border-box;
-            gap: 16px;
-            -webkit-overflow-scrolling: touch;
+        #archive-naming .naming-flow {
+            position: relative !important;
+            width: 375px !important;
+            max-width: 428px !important;
+            min-width: 375px !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            margin: 0 auto !important;
+            padding: 0 16px 96px 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+            text-align: center !important;
         }
 
-        .naming-bottom-dock {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 2rem);
-            max-width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-            z-index: 6;
+        #archive-naming .naming-center-col {
+            width: 100% !important;
+            max-width: 328px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            flex-shrink: 0 !important;
         }
 
-        .naming-foot-prebtn {
-            margin-bottom: 16px;
-            width: 100%;
+        #archive-naming .naming-loading {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 29px !important;
+            color: #D8D0BE !important;
+            opacity: 0.65 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        .naming-bottom-dock:not(.naming-dock-visible) {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        #archive-naming .naming-step-off {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
-        .naming-bottom-dock.naming-dock-visible {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transition: opacity 0.5s ease;
+        #archive-naming .naming-step-on {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transition: opacity 1s ease !important;
         }
 
-        #naming-next {
-            position: relative;
-            opacity: 0;
-            transform: translateY(12px);
-            visibility: hidden;
-            transition: opacity 1s ease, transform 1s ease, visibility 0s linear 1s;
+        #archive-naming .naming-h1 {
+            margin: 0 !important;
+            padding: 16px 20px !important;
+            width: 100% !important;
+            max-width: 328px !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            line-height: 43px !important;
+            letter-spacing: 0 !important;
+            color: #D8D0BE !important;
+            text-align: center !important;
+            background: rgba(179, 163, 141, 0.1) !important;
+            border-radius: 0 !important;
+            box-sizing: border-box !important;
         }
 
-        #naming-next.naming-next--show {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-            transition: opacity 1s ease, transform 1s ease, visibility 0s linear 0s;
+        #archive-naming .naming-seal-wrap {
+            margin: 24px 0 0 0 !important;
+            padding: 0 !important;
+            width: 48px !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
         }
 
-        #naming-loading {
-            line-height: 1.6;
+        #archive-naming .naming-seal {
+            width: 40px !important;
+            height: 40px !important;
+            border: 1px solid #B3A38D !important;
+            background: rgba(179, 163, 141, 0.35) !important;
+            border-radius: 0 !important;
+            box-sizing: border-box !important;
+            opacity: 1 !important;
         }
 
-        .naming-label {
-            font-size: 18px;
-            font-weight: 700;
-            color: #D8D0BE;
-            padding: 16px 18px;
-            background: var(--label-tint);
-            letter-spacing: 0.1em;
-            line-height: 1.6;
-            max-width: 100%;
-            box-sizing: border-box;
-            text-align: center;
+        #archive-naming .naming-seal.seal-anim {
+            animation: namingSealDown 0.85s ease-out forwards !important;
         }
 
-        .naming-sub {
-            font-size: 16px;
-            line-height: 1.6;
-            color: color-mix(in srgb, #D8D0BE 82%, transparent);
-            margin-top: 0;
-            max-width: 100%;
-            word-break: break-word;
-            overflow-wrap: anywhere;
-            text-align: center;
+        @keyframes namingSealDown {
+            0% {
+                transform: translateY(-28px) scale(1.05);
+                opacity: 0;
+                box-shadow: none;
+            }
+            55% {
+                transform: translateY(4px) scale(0.96);
+                opacity: 1;
+                box-shadow: 0 0 0 1px rgba(179, 163, 141, 0.25), 0 8px 16px rgba(0, 0, 0, 0.5), 0 4px 24px rgba(0, 0, 0, 0.35);
+            }
+            75% {
+                transform: translateY(-2px) scale(1.02);
+                box-shadow: 0 0 0 1px rgba(179, 163, 141, 0.2), 0 6px 12px rgba(0, 0, 0, 0.35);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                box-shadow: 0 0 0 1px rgba(179, 163, 141, 0.15), 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
         }
 
-        .naming-foot {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #D8D0BE;
-            opacity: 0.72;
-            margin: 0;
-            text-align: center;
-            max-width: 100%;
-            word-break: break-word;
-            overflow-wrap: anywhere;
+        #archive-naming .naming-guides {
+            margin: 40px 0 0 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: 328px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
         }
 
-        #archive-naming #seal-wrap.naming-seal-wrap {
-            margin-top: 16px;
-            max-height: 120px;
-            min-height: 40px;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        #archive-naming .naming-guide {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 1.8 !important;
+            letter-spacing: 0 !important;
+            color: #D8D0BE !important;
+            opacity: 0.8 !important;
+            text-align: center !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
         }
 
-        .end-copy {
-            width: 85%;
-            text-align: center;
-            position: absolute;
-            top: 18%;
+        #archive-naming .naming-footnote {
+            margin: 8px 0 0 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            letter-spacing: 0 !important;
+            color: #D8D0BE !important;
+            opacity: 0.5 !important;
+            text-align: center !important;
         }
 
-        .end-copy p {
-            font-size: 16px;
-            line-height: 2.2em;
-            letter-spacing: 0.15em;
-            color: var(--color-primary);
+        #archive-naming .naming-footnote.naming-footnote-breathe {
+            animation: namingFootnoteBreath 4s ease-in-out infinite !important;
         }
 
-        .timeline-wrap {
-            position: absolute;
-            bottom: 15%;
-            width: 100%;
-            height: 56px;
+        @keyframes namingFootnoteBreath {
+            0%, 100% { opacity: 0.45 !important; }
+            50% { opacity: 0.55 !important; }
         }
 
-        .end-brand {
-            position: absolute;
-            bottom: 7%;
-            font-size: 12px;
-            color: var(--color-primary);
-            opacity: 0.35;
-            letter-spacing: 0.15em;
+        #archive-naming .naming-dock-visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        #archive-naming .naming-bottom-dock {
+            position: absolute !important;
+            bottom: 48px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 48px !important;
+            height: 48px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 10 !important;
+        }
+
+        #archive-naming .naming-next-btn {
+            width: 48px !important;
+            height: 48px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 1px solid #D8D0BE !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            color: #D8D0BE !important;
+            font-size: 22px !important;
+            line-height: 48px !important;
+            text-align: center !important;
+            cursor: pointer !important;
+            box-sizing: border-box !important;
+            font-family: inherit !important;
+            transition: opacity 1s ease, border-color 0.2s ease !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        #archive-naming .naming-bottom-dock.naming-dock-visible .naming-next-btn {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        #archive-naming .naming-next-btn:active {
+            border-color: #B3A38D !important;
+        }
+
+        #archive-naming .naming-next-arrow {
+            display: block !important;
+            line-height: 48px !important;
+        }
+
+        /* ---------- 第八阶段：结束页 ---------- */
+        #page-end.page-end-screen {
+            background: #606060 !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+        }
+
+        #page-end .end-layout {
+            position: absolute !important;
+            inset: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+            padding-top: 48px !important;
+        }
+
+        #page-end .end-timeline-zone {
+            position: relative !important;
+            flex: 0 0 60% !important;
+            width: 100% !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+        }
+
+        #page-end .end-sine-svg {
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            transform: none !important;
+            overflow: visible !important;
+        }
+
+        #page-end .end-sine-path {
+            fill: none !important;
+            stroke: #B3A38D !important;
+            stroke-width: 1.5 !important;
+            stroke-linecap: round !important;
+            stroke-linejoin: round !important;
+        }
+
+        #page-end .end-sine-path.end-sine-drawn {
+            animation: endSineDraw 4s cubic-bezier(0.33, 0.72, 0.28, 1) forwards !important;
+        }
+
+        @keyframes endSineDraw {
+            to { stroke-dashoffset: 0 !important; }
+        }
+
+        #page-end .end-node {
+            position: absolute !important;
+            width: 0 !important;
+            height: 0 !important;
+            opacity: 0 !important;
+            transition: opacity 0.55s ease !important;
+            z-index: 2 !important;
+        }
+
+        #page-end .end-node.end-node-visible {
+            opacity: 1 !important;
+        }
+
+        #page-end .end-node--past.end-node-visible {
+            opacity: 0.4 !important;
+        }
+
+        #page-end .end-node--current.end-node-visible {
+            opacity: 1 !important;
+        }
+
+        #page-end .end-dot {
+            width: 9px !important;
+            height: 9px !important;
+            border-radius: 50% !important;
+            background: #D8D0BE !important;
+            position:absolute !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 5 !important;
+        }
+
+        #page-end .end-node--current .end-dot {
+            box-shadow: 0 0 14px #B3A38D, 0 0 28px rgba(179, 163, 141, 0.55), 0 0 42px rgba(179, 163, 141, 0.25) !important;
+        }
+
+        #page-end .end-tip {
+            position: absolute !important;
+            bottom:12px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            text-align: center !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            white-space: nowrap !important;
+            line-height: 1.45 !important;
+            pointer-events: none !important;
+        }
+
+        #page-end .end-tip--dim {
+            color: #D8D0BE !important;
+            opacity: 1 !important;
+            padding: 4px 6px !important;
+            border: 1px solid rgba(216, 208, 190, 0.25) !important;
+            background: rgba(96, 96, 96, 0.6) !important;
+            font-size: 10px !important;
+            letter-spacing: 0.06em !important;
+        }
+
+        #page-end .end-tip--gold {
+            color: #D8D0BE !important;
+            opacity: 0 !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            padding: 6px 8px !important;
+            border: 1px solid #B3A38D !important;
+            outline: 1px solid rgba(179, 163, 141, 0.35) !important;
+            outline-offset: 2px !important;
+            background: rgba(96, 96, 96, 0.85) !important;
+            transition: opacity 0.7s ease, box-shadow 0.7s ease !important;
+            writing-mode: horizontal-tb !important;
+        }
+
+        #page-end .end-tip--gold.end-tip-lit {
+            opacity: 1 !important;
+            box-shadow: 0 0 16px rgba(179, 163, 141, 0.45) !important;
+        }
+
+        #page-end .end-drop-light {
+            position: absolute !important;
+            width: 11px !important;
+            height: 11px !important;
+            border-radius: 50% !important;
+            background: #D8D0BE !important;
+            box-shadow: 0 0 12px #B3A38D, 0 0 24px rgba(179, 163, 141, 0.5) !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 4 !important;
+            opacity: 0 !important;
+            transition: left 1.15s cubic-bezier(0.33, 0.72, 0.28, 1), top 1.15s cubic-bezier(0.4, 0.05, 0.2, 1), opacity 0.4s ease !important;
+        }
+
+        #page-end .end-drop-light.end-drop-landed {
+            opacity: 1 !important;
+        }
+
+        #page-end .end-copy-zone {
+            flex: 0 0 25% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0 32px !important;
+            box-sizing: border-box !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        #page-end .end-copy-text {
+            width: 100% !important;
+            max-width: 340px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            text-align: center !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            line-height: 2em !important;
+            letter-spacing: 0.15em !important;
+            color: #D8D0BE !important;
+            opacity: 0 !important;
+            transition: opacity 1s ease !important;
+        }
+
+        #page-end .end-copy-text.end-copy-visible {
+            opacity: 1 !important;
+        }
+
+        #page-end .end-dock-zone {
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            height: 15% !important;
+            min-height: 0 !important;
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+            box-sizing: border-box !important;
+            z-index: 12 !important;
+            pointer-events: none !important;
+        }
+
+
+        #page-end .end-finish-btn {
+            position: absolute !important;
+            left: 50% !important;
+            bottom: 8% !important;
+            transform: translateX(-50%) !important;
+            min-width: 120px !important;
+            height: 44px !important;
+            padding: 0 28px !important;
+            border: none !important;
+            border-radius: 0 !important;
+            background: #B3A38D !important;
+            color: #D8D0BE !important;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.2em !important;
+            cursor: pointer !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 1s ease !important;
+            z-index: 10 !important;
+        }
+
+        #page-end .end-finish-btn.end-finish-visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        #page-archive .archive-emotional-scene,
+        #page-archive #archive-naming.archive-scene {
+            padding-top: 48px !important;
+            box-sizing: border-box !important;
         }
     </style>
 </head>
@@ -1756,6 +2220,9 @@
 
         <!-- 7 解读（三阶段同页） -->
         <div id="page-reading" class="page">
+            <button type="button" class="phase-back-btn" id="reading-back-btn" aria-label="返回回看">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6 L9 12 L15 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
             <div id="reading-p1" class="interpret-panel interpret-panel-reading1">
                 <div class="reading-mini">
                     <div class="tarot-card" id="rm-1"><div class="name-cn">隐者</div></div>
@@ -1768,9 +2235,12 @@
                         <div id="read1-body"></div>
                     </div>
                 </div>
-                <button type="button" class="btn-flat" id="explore-btn">探寻关联</button>
+                <div class="read1-next-hint" id="read1-next-hint" aria-hidden="true">
+                    <span class="read1-next-arrow">→</span>
+                </div>
+                <button type="button" class="btn-flat" id="explore-btn"><span class="btn-lbl">探寻关联</span></button>
             </div>
-            <div id="reading-p2" class="interpret-panel interpret-panel-reading2 hidden">
+            <div id="reading-p2" class="interpret-panel interpret-panel-reading2">
                 <div class="reading-mini" id="reading-p2-cards">
                     <div class="tarot-card" id="rm2-1"><div class="name-cn">隐者</div></div>
                     <div class="tarot-card" id="rm2-2"><div class="name-cn">宝剑三</div></div>
@@ -1781,7 +2251,7 @@
                     <div id="read2-body"></div>
                 </div>
             </div>
-            <div id="reading-p3" class="interpret-panel interpret-panel-read3 hidden">
+            <div id="reading-p3" class="interpret-panel interpret-panel-read3">
                 <div class="interpret-final-wrap read3-meditation" id="read3-wrap">
                     <div class="read3-pool-bg" aria-hidden="true"></div>
                     <div class="read3-ripple-field" id="read3-ripple-field" aria-hidden="true"></div>
@@ -1805,41 +2275,66 @@
 
         <!-- 8 情绪承接 + 命名 -->
         <div id="page-archive" class="page">
-            <div class="archive-scene" id="archive-emotional">
-                <div id="archive-emotional-text"></div>
+            <button type="button" class="phase-back-btn" id="archive-back-btn" aria-label="返回回看">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6 L9 12 L15 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="archive-scene archive-emotional-scene" id="archive-emotional">
+                <h2 id="archive-emotional-text" class="emotional-bridge-text"></h2>
             </div>
             <div class="archive-scene hidden" id="archive-naming">
-                <div class="naming-block">
-                    <div class="naming-main-stack">
-                        <div id="naming-loading" class="naming-load-txt">正在凝练共识…</div>
-                        <div id="naming-label" class="naming-label hidden" style="opacity:0;margin-top:8px;">一个在独处中缓慢疗愈的阶段</div>
-                        <div id="seal-wrap" class="hidden naming-seal-wrap" style="opacity:0;">
-                            <div id="seal-inner" class="seal-box" style="opacity:0;"></div>
+                <div class="naming-flow">
+                    <div id="naming-loading" class="naming-loading">正在凝练共识…</div>
+                    <div class="naming-center-col" id="naming-center-col">
+                        <h1 id="naming-label" class="naming-h1 naming-step-off">一个在独处中缓慢疗愈的阶段</h1>
+                        <div id="seal-wrap" class="naming-seal-wrap naming-step-off">
+                            <div id="seal-inner" class="naming-seal"></div>
                         </div>
-                        <p id="naming-p1" class="naming-sub hidden" style="opacity:0;margin-top:12px;">此刻的共识已归档</p>
-                        <p id="naming-p2" class="naming-sub hidden" style="opacity:0;"></p>
-                        <p id="naming-p3" class="naming-foot naming-foot-prebtn hidden" style="opacity:0;"></p>
+                        <div class="naming-guides naming-step-off" id="naming-guides">
+                            <p id="naming-p1" class="naming-guide naming-step-off">此刻的共识已归档。</p>
+                            <p id="naming-p2" class="naming-guide naming-step-off">感受的起伏如同潮汐，<br>给它一点退潮的时间</p>
+                            <p id="naming-p3" class="naming-footnote naming-step-off">48小时内，静观其变</p>
+                        </div>
                     </div>
                     <div class="naming-bottom-dock" id="naming-bottom-dock">
-                        <button type="button" class="btn-flat" id="naming-next" aria-label="回到当下">回到当下</button>
+                        <button type="button" class="naming-next-btn" id="naming-next" aria-label="下一步">
+                            <span class="naming-next-arrow">→</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- 9 结束 -->
-        <div id="page-end" class="page">
-            <div class="end-copy">
-                <p id="end-p1" style="opacity:0;">每一次命名<br>都是你在这个世界留下的精神坐标</p>
-                <p id="end-p2" style="opacity:0;margin-top:12px;transform:scale(1);">连点成线<br>你会看见自己穿过迷雾的轨迹</p>
-            </div>
-            <div class="timeline-wrap" id="timeline-wrap" style="opacity:0;">
-                <div class="flow-line" id="flow-line"></div>
-                <div class="light-point" id="light-point" style="left:50%;top:50%;transform:translate(-50%,-50%);">
-                    <div class="point-tip" id="point-tip">一个在独处中缓慢疗愈的阶段</div>
+        <div id="page-end" class="page page-end-screen">
+            <button type="button" class="phase-back-btn" id="end-back-btn" aria-label="返回回看">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6 L9 12 L15 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="end-layout">
+                <div class="end-timeline-zone" id="end-timeline-zone">
+                    <svg class="end-sine-svg" id="end-sine-svg" viewBox="0 0 360 100" preserveAspectRatio="none" aria-hidden="true">
+                        <path id="end-sine-path" class="end-sine-path" fill="none"></path>
+                    </svg>
+                    <div class="end-node end-node--past end-node--1" id="end-node-1">
+                        <div class="end-tip end-tip--dim">一个试图逃避的沉淀阶段</div>
+                        <div class="end-dot"></div>
+                    </div>
+                    <div class="end-node end-node--past end-node--2" id="end-node-2">
+                        <div class="end-tip end-tip--dim">在喧嚣中寻找出口的阶段</div>
+                        <div class="end-dot"></div>
+                    </div>
+                    <div class="end-node end-node--current end-node--3" id="end-node-3">
+                        <div class="end-tip end-tip--gold" id="end-tip-current">一个在独处中缓慢疗愈的阶段</div>
+                        <div class="end-dot"></div>
+                    </div>
+                    <div class="end-drop-light" id="end-drop-light" aria-hidden="true"></div>
+                </div>
+                <div class="end-copy-zone">
+                    <p class="end-copy-text" id="end-copy-text"></p>
+                </div>
+                <div class="end-dock-zone">
+                    <button type="button" class="end-finish-btn" id="end-finish-btn">结束</button>
                 </div>
             </div>
-            <div class="end-brand">观己</div>
         </div>
     </div>
 
@@ -1854,7 +2349,12 @@
     let read3RippleCounter = 0;
     let selectedDirection = '情感关系';
     let namingSeq = 0;
+    let emotionalBridgeSeq = 0;
+    let endSeq = 0;
+    let reviewRestore = null;
     let activePack = null;
+
+    const END_SCREEN_COPY = '每一张留在心底的牌，每一个被你命名的阶段，\n都是你在起伏岁月里留下的精神坐标。\n当这些点在时间轴上连点成线，\n你终会看见自己穿过迷雾、重获长久力量的真实轨迹。';
 
     function addT(fn, ms) {
         const id = setTimeout(fn, ms);
@@ -1866,6 +2366,9 @@
         timers.forEach(clearTimeout);
         timers.length = 0;
         read3AmbientTimer = null;
+        emotionalBridgeSeq += 1;
+        namingSeq += 1;
+        endSeq += 1;
         TextRevealController.abort();
     }
 
@@ -2243,7 +2746,7 @@
     };
 
     /* ---------- 7 解读三阶段（按方向分支，结构与学业/个人成长一致） ---------- */
-    const READ1_TITLE = '第一层：牌面象征（三条单牌解读）：';
+    const READ1_TITLE = '第一层：牌面象征（三条单牌解读）';
     const READ2_LAYER = '第二层：关联解读';
 
     const READ_PACKS = {
@@ -2419,12 +2922,12 @@
 
     function scheduleRead3AmbientRipples() {
         clearRead3Ambient();
-        var AMBIENT_MS = 6500;
         function next() {
+            var delay = 5000 + Math.floor(Math.random() * 3000);
             read3AmbientTimer = addT(function () {
                 spawnRead3BgRipple();
                 next();
-            }, AMBIENT_MS);
+            }, delay);
         }
         next();
     }
@@ -2450,23 +2953,425 @@
         });
     }
 
+    function resetReadingCards(prefix) {
+        for (let i = 1; i <= 3; i++) {
+            const el = document.getElementById(prefix + i);
+            if (!el) continue;
+            el.classList.remove('reading-card-active', 'reading-card-lit', 'reading-card-inactive');
+            el.classList.add('reading-card-inactive');
+            el.style.borderColor = '';
+            el.style.opacity = '';
+            el.style.boxShadow = '';
+            el.style.backgroundColor = '';
+        }
+    }
+
     function setMiniHighlight(active) {
         ['rm-1', 'rm-2', 'rm-3'].forEach(function (id, i) {
             const el = document.getElementById(id);
-            el.style.transition = 'border-color 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease';
-            if (i === active) {
-                el.style.borderColor = '#B3A38D';
-                el.style.opacity = '1';
-                el.style.boxShadow = '0 4px 14px color-mix(in srgb, #B3A38D 45%, transparent)';
+            el.classList.remove('reading-card-active', 'reading-card-lit', 'reading-card-inactive');
+            if (i < active) {
+                el.classList.add('reading-card-lit');
+            } else if (i === active) {
+                el.classList.add('reading-card-active');
             } else {
-                el.style.borderColor = '#D8D0BE';
-                el.style.opacity = '0.3';
-                el.style.boxShadow = 'none';
+                el.classList.add('reading-card-inactive');
             }
         });
     }
 
+    let readingNavLayer = 1;
+
+    function applyReadingLayer(layer) {
+        readingNavLayer = layer;
+        const page = document.getElementById('page-reading');
+        const p1 = document.getElementById('reading-p1');
+        const p2 = document.getElementById('reading-p2');
+        const p3 = document.getElementById('reading-p3');
+        const btn = document.getElementById('explore-btn');
+
+        page.classList.remove('reading-layer-1', 'reading-layer-2', 'reading-layer-3');
+        p2.classList.remove('reading-layer-active');
+        p3.classList.remove('reading-layer-active');
+        btn.classList.remove('reading-nav-visible');
+        btn.onclick = null;
+
+        if (layer === 1) {
+            page.classList.add('reading-layer-1');
+            p1.classList.remove('reading-p1-shelled');
+        } else {
+            p1.classList.add('reading-p1-shelled');
+            if (layer === 2) {
+                page.classList.add('reading-layer-2');
+                void p2.offsetWidth;
+                p2.classList.add('reading-layer-active');
+            } else if (layer === 3) {
+                page.classList.add('reading-layer-3');
+                p2.classList.remove('reading-layer-active');
+                void p3.offsetWidth;
+                p3.classList.add('reading-layer-active');
+            }
+        }
+    }
+
+    function setReadingLayer(layer) {
+        if (layer < readingNavLayer) return;
+        applyReadingLayer(layer);
+    }
+
+    function restoreReadingLayer1Complete() {
+        activePack = getActivePack();
+        applyReadingLayer(1);
+        resetReadingCards('rm-');
+        ['rm-1', 'rm-2', 'rm-3'].forEach(function (id) {
+            const el = document.getElementById(id);
+            el.classList.remove('reading-card-active', 'reading-card-inactive');
+            el.classList.add('reading-card-lit');
+        });
+        document.getElementById('read1-layer').textContent = READ1_TITLE;
+        const body1 = document.getElementById('read1-body');
+        const panel1 = document.getElementById('read-text-1');
+        body1.innerHTML = activePack.read1.map(function (line) {
+            return '<p style="margin:0 0 0.75em">' + line + '</p>';
+        }).join('');
+        panel1.onclick = null;
+        setRead1NextHint(false);
+        showReadingNavBtn(goReadingLayer2, '探寻关联');
+    }
+
+    function restoreReadingLayer2Complete() {
+        activePack = getActivePack();
+        applyReadingLayer(2);
+        const body2 = document.getElementById('read2-body');
+        const layer2 = document.getElementById('read2-layer');
+        const panel2 = document.getElementById('read-text-2');
+        layer2.textContent = READ2_LAYER;
+        body2.innerHTML = activePack.read2Body.replace(/隐者|宝剑三|星星/g, function (m) {
+            return '<span class="highlight-name">' + m + '</span>';
+        });
+        for (let i = 1; i <= 3; i++) {
+            const el = document.getElementById('rm2-' + i);
+            el.classList.remove('reading-card-active', 'reading-card-inactive');
+            el.classList.add('reading-card-lit');
+        }
+        panel2.onclick = null;
+        showReadingNavBtn(goReadingLayer3, '体悟整体');
+    }
+
+    function restoreReadingLayer3Complete() {
+        activePack = getActivePack();
+        clearRead3Ambient();
+        applyReadingLayer(3);
+        const wrap3 = document.getElementById('read3-wrap');
+        const t3 = document.getElementById('read-text-3');
+        const flo = document.getElementById('read3-float');
+        const spot = document.getElementById('read3-spotlight');
+        wrap3.classList.remove('read3-exit-fall');
+        wrap3.onclick = null;
+        t3.innerHTML = read3FullHighlightedHtml();
+        t3.classList.add('read3-breathe', 'read3-text--full');
+        flo.classList.add('read3-float-idle');
+        spot.classList.add('read3-spotlight--expand');
+        showReadingNavBtn(function () {
+            const w = document.getElementById('read3-wrap');
+            w.onclick = null;
+            clearRead3Ambient();
+            w.classList.add('read3-exit-fall');
+            addT(function () { goToPage('page-archive', 'fade'); }, 1280);
+        }, '生成共识');
+    }
+
+    function restoreArchiveEmotionalFull() {
+        archivePhase = 'emotional';
+        document.getElementById('archive-emotional').classList.remove('hidden');
+        document.getElementById('archive-naming').classList.add('hidden');
+        const et = document.getElementById('archive-emotional-text');
+        et.innerHTML = EMOTIONAL_BRIDGE_S1 + '<br>' + EMOTIONAL_BRIDGE_S2;
+        et.className = 'emotional-bridge-text emotional-bridge-done emotional-breathe';
+    }
+
+    function restoreArchiveNamingFull() {
+        archivePhase = 'naming';
+        const pack = getActivePack();
+        document.getElementById('archive-emotional').classList.add('hidden');
+        document.getElementById('archive-naming').classList.remove('hidden');
+        document.getElementById('naming-loading').style.display = 'none';
+        const label = document.getElementById('naming-label');
+        label.textContent = namingFormat(pack.namingLabel);
+        label.classList.remove('naming-step-off');
+        label.style.opacity = '1';
+        document.getElementById('seal-wrap').classList.remove('naming-step-off');
+        const seal = document.getElementById('seal-inner');
+        seal.classList.remove('seal-anim');
+        seal.style.transform = 'translateY(0) scale(1)';
+        seal.style.opacity = '1';
+        document.getElementById('naming-guides').classList.remove('naming-step-off');
+        document.getElementById('naming-p1').classList.remove('naming-step-off');
+        document.getElementById('naming-p1').style.opacity = '0.8';
+        const p2 = document.getElementById('naming-p2');
+        p2.classList.remove('naming-step-off');
+        p2.style.opacity = '0.8';
+        p2.innerHTML = namingFormat(pack.namingP2a) + '<br>' + namingFormat(pack.namingP2b);
+        const p3 = document.getElementById('naming-p3');
+        p3.classList.remove('naming-step-off', 'naming-footnote-breathe');
+        p3.textContent = namingFormat(pack.namingP3);
+        p3.style.opacity = '0.5';
+        p3.classList.add('naming-footnote-breathe');
+        const dock = document.getElementById('naming-bottom-dock');
+        dock.classList.remove('naming-step-off');
+        dock.classList.add('naming-dock-visible');
+        dock.style.opacity = '1';
+        const btn = document.getElementById('naming-next');
+        btn.style.opacity = '1';
+        btn.classList.add('naming-next--show');
+        btn.onclick = function () { goToPage('page-end', 'fade'); };
+    }
+
+    function wirePhaseBackTouch() {
+        ['reading-back-btn', 'archive-back-btn', 'end-back-btn'].forEach(function (id) {
+            const btn = document.getElementById(id);
+            if (!btn || btn.dataset.backTouchWired) return;
+            btn.dataset.backTouchWired = '1';
+            btn.addEventListener('touchstart', function () {
+                btn.classList.add('phase-back-lit');
+            }, { passive: true });
+            btn.addEventListener('touchend', function () {
+                btn.classList.remove('phase-back-lit');
+            }, { passive: true });
+            btn.addEventListener('touchcancel', function () {
+                btn.classList.remove('phase-back-lit');
+            }, { passive: true });
+        });
+    }
+
+    /** 全链路回看：清计时器 + 中止逐字，单步回溯，目标页全显 */
+    function phaseBackFromReading() {
+        clearTimers();
+        clearRead3Ambient();
+        TextRevealController.abort();
+        setRead1NextHint(false);
+        if (readingNavLayer <= 1) {
+            goToPage('page-draw', 'fade');
+            return;
+        }
+        if (readingNavLayer === 2) {
+            restoreReadingLayer1Complete();
+            return;
+        }
+        if (readingNavLayer === 3) {
+            restoreReadingLayer2Complete();
+        }
+    }
+
+    function phaseBackFromArchive() {
+        clearTimers();
+        emotionalBridgeSeq += 1;
+        TextRevealController.abort();
+        const namingScene = document.getElementById('archive-naming');
+        if (namingScene && !namingScene.classList.contains('hidden')) {
+            restoreArchiveEmotionalFull();
+            return;
+        }
+        reviewRestore = 'reading-p3';
+        goToPage('page-reading', 'fade');
+    }
+
+    function phaseBackFromEnd() {
+        clearTimers();
+        endSeq += 1;
+        TextRevealController.abort();
+        reviewRestore = 'archive-naming';
+        goToPage('page-archive', 'fade');
+    }
+
+    /** 第八阶段闭环：清空会话状态，回到品牌认知页（首页） */
+    function resetDemoToBrand() {
+        clearTimers();
+        clearRead3Ambient();
+        TextRevealController.abort();
+        reviewRestore = null;
+        readingNavLayer = 1;
+        archivePhase = 'emotional';
+        read3RippleCounter = 0;
+        emotionalBridgeSeq += 1;
+        namingSeq += 1;
+        endSeq += 1;
+        resetEndScreenUI();
+        const emotional = document.getElementById('archive-emotional');
+        const naming = document.getElementById('archive-naming');
+        if (emotional) emotional.classList.remove('hidden');
+        if (naming) naming.classList.add('hidden');
+        const finish = document.getElementById('end-finish-btn');
+        if (finish) {
+            finish.classList.remove('end-finish-visible');
+            finish.onclick = null;
+        }
+        goToPage('page-brand', 'fade');
+    }
+
+    const END_SINE = { W: 360, H: 100, MID: 50, AMP: 22, WAVES: 1.0 };
+    const END_NODE_X_PCT = [18, 50, 82];
+    const END_ANIM = {
+        NODE1_MS: 900,
+        NODE2_MS: 1300,
+        DROP_MS: 2000,
+        REVEAL_MS: 3200,
+        FINISH_DELAY_MS: 1000
+    };
+
+    function endSineY(x, w, mid, amp, waves) {
+        waves = waves == null ? END_SINE.WAVES : waves;
+        return mid + amp * Math.sin((x / w) * Math.PI * 2 * waves);
+    }
+
+    function buildEndTimelineGeometry() {
+        const svg = document.getElementById('end-sine-svg');
+        const path = document.getElementById('end-sine-path');
+        if (!svg || !path) return;
+        const rect = svg.getBoundingClientRect();
+        const W = rect.width || 360;
+        const H = rect.height || 240;
+        const points = [
+        { x: W * 0.15, y: H * 0.72 },
+        { x: W * 0.48, y: H * 0.35 },
+        { x: W * 0.48, y: H * 0.35 },
+        ];
+        const p0 = points[0];
+        const p1 = points[1];
+        const p2 = points[2];
+        const d = `
+        M ${p0.x} ${p0.y}
+        C ${p0.x + (p1.x - p0.x) * 0.4} ${p0.y - H * 0.1}, ${p1.x - (p1.x - p0.x) * 0.4} ${p1.y + H * 0.1}, ${p1.x} ${p1.y}
+        C ${p1.x + (p2.x - p1.x) * 0.4} ${p1.y - H * 0.35}, ${p2.x - (p2.x - p1.x) * 0.4} ${p2.y - H * 0.05}, ${p2.x} ${p2.y}
+        `;
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        path.setAttribute('d', d);
+        const len = path.getTotalLength ? path.getTotalLength() : 1200;
+        path.style.strokeDasharray = String(len);
+        path.style.strokeDashoffset = String(len);
+        points.forEach(function(point, idx) {
+            const node = document.getElementById('end-node-' + (idx + 1));
+            if (!node) return;
+            node.style.left = point.x + 'px';
+            node.style.top = point.y + 'px';
+        });
+        const drop = document.getElementById('end-drop-light');
+        if (drop) {
+            drop.style.left = p2.x + 'px';
+            drop.style.top = (p2.y - 150) + 'px';
+            drop.dataset.landLeft = p2.x + 'px';
+            drop.dataset.landTop = p2.y + 'px';
+        }
+    }
+
+    function resetEndScreenUI() {
+        const path = document.getElementById('end-sine-path');
+        const n1 = document.getElementById('end-node-1');
+        const n2 = document.getElementById('end-node-2');
+        const n3 = document.getElementById('end-node-3');
+        const drop = document.getElementById('end-drop-light');
+        const tipCur = document.getElementById('end-tip-current');
+        const copy = document.getElementById('end-copy-text');
+        
+        if (path) path.classList.remove('end-sine-drawn');
+        [n1, n2, n3].forEach(function (n) {
+            if (n) n.classList.remove('end-node-visible');
+        });
+        if (tipCur) tipCur.classList.remove('end-tip-lit');
+        if (copy) copy.classList.remove('end-copy-visible');
+        const finish = document.getElementById('end-finish-btn');
+        if (finish) {
+            finish.classList.remove('end-finish-visible');
+            finish.onclick = null;
+        }
+        if (n3) n3.style.opacity = '0';
+        if (drop) {
+            drop.classList.remove('end-drop-landed');
+            drop.style.opacity = '0';
+            const svg = document.getElementById('end-sine-svg');
+            if (svg) {
+                const rect = svg.getBoundingClientRect();
+                const W = rect.width || 360;
+                const H = rect.height || 240;
+                drop.style.left = (W * 0.82) + 'px';
+                drop.style.top = ((H * 0.58) - 150) + 'px';
+            }
+        }
+    }
+
+    function endRevealCurrentNode() {
+        const drop = document.getElementById('end-drop-light');
+        const n3 = document.getElementById('end-node-3');
+        const tipCur = document.getElementById('end-tip-current');
+        const copy = document.getElementById('end-copy-text');
+        if (drop) drop.style.opacity = '0';
+        if (n3) {
+            n3.style.opacity = '1';
+            n3.classList.add('end-node-visible');
+        }
+        if (tipCur) tipCur.classList.add('end-tip-lit');
+        if (copy) copy.classList.add('end-copy-visible');
+    }
+
+    function showEndFinishButton(ok) {
+        const finish = document.getElementById('end-finish-btn');
+        if (!finish) return;
+        finish.classList.add('end-finish-visible');
+        let closed = false;
+        finish.onclick = function () {
+            if (closed || !ok()) return;
+            closed = true;
+            finish.classList.remove('end-finish-visible');
+            finish.onclick = null;
+            resetDemoToBrand();
+        };
+    }
+
+    function resetReadingNav() {
+        setReadingLayer(1);
+    }
+
+    function showReadingNavBtn(handler, label) {
+        const btn = document.getElementById('explore-btn');
+        const lbl = btn.querySelector('.btn-lbl');
+        if (label) {
+            if (lbl) lbl.textContent = label;
+            else btn.textContent = label;
+        }
+        const layerAtShow = readingNavLayer;
+        btn.classList.add('reading-nav-visible');
+        btn.onclick = function () {
+            if (!btn.classList.contains('reading-nav-visible')) return;
+            if (readingNavLayer !== layerAtShow) return;
+            btn.classList.remove('reading-nav-visible');
+            btn.onclick = null;
+            handler();
+        };
+    }
+
+    function setRead1NextHint(visible) {
+        const hint = document.getElementById('read1-next-hint');
+        if (hint) hint.classList.toggle('read1-next-visible', !!visible);
+    }
+
+    function goReadingLayer2() {
+        if (readingNavLayer !== 1) return;
+        setReadingLayer(2);
+        startPhase2();
+    }
+
+    function goReadingLayer3() {
+        if (readingNavLayer !== 2) return;
+        setReadingLayer(3);
+        startPhase3();
+    }
+
     function initReading() {
+        if (reviewRestore === 'reading-p3') {
+            reviewRestore = null;
+            restoreReadingLayer3Complete();
+            return;
+        }
         activePack = getActivePack();
         clearRead3Ambient();
         const rf = document.getElementById('read3-ripple-field');
@@ -2479,56 +3384,83 @@
             w3.onclick = null;
             w3.querySelectorAll('.read3-fall-dot').forEach(function (d) { d.remove(); });
         }
-        document.getElementById('reading-p1').classList.remove('hidden');
-        document.getElementById('reading-p2').classList.add('hidden');
-        document.getElementById('reading-p3').classList.add('hidden');
-        document.getElementById('explore-btn').style.opacity = '0';
-        document.getElementById('explore-btn').onclick = null;
+        resetReadingNav();
+        resetReadingCards('rm-');
+        const exploreLbl = document.querySelector('#explore-btn .btn-lbl');
+        if (exploreLbl) exploreLbl.textContent = '探寻关联';
 
         const layer1 = document.getElementById('read1-layer');
         const body1 = document.getElementById('read1-body');
         const panel1 = document.getElementById('read-text-1');
-        const explore = document.getElementById('explore-btn');
         layer1.innerHTML = '';
         body1.innerHTML = '';
+        setRead1NextHint(false);
         let cardIdx = 0;
-        let skipHandler = null;
+        let tapHandler = null;
+        let waitAdvance = false;
+        let revealDone = false;
 
         function cleanTap() {
-            if (skipHandler) {
-                panel1.removeEventListener('click', skipHandler);
-                skipHandler = null;
+            if (tapHandler) {
+                panel1.removeEventListener('click', tapHandler);
+                tapHandler = null;
             }
+            waitAdvance = false;
+            revealDone = false;
+        }
+
+        function onCardTextReady(idx) {
+            revealDone = true;
+            waitAdvance = true;
+            setRead1NextHint(true);
+        }
+
+        function advanceToNextCard(idx) {
+            setRead1NextHint(false);
+            waitAdvance = false;
+            revealDone = false;
+            cardIdx = idx + 1;
+            runCard();
         }
 
         function runCard() {
             cleanTap();
             if (cardIdx >= activePack.read1.length) {
-                explore.style.opacity = '1';
-                explore.onclick = function () { startPhase2(); };
+                setRead1NextHint(false);
+                ['rm-1', 'rm-2', 'rm-3'].forEach(function (id) {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    el.classList.remove('reading-card-active', 'reading-card-inactive');
+                    el.classList.add('reading-card-lit');
+                });
+                if (readingNavLayer === 1) {
+                    showReadingNavBtn(goReadingLayer2, '探寻关联');
+                }
                 return;
             }
             setMiniHighlight(cardIdx);
             body1.innerHTML = '';
-            let done = false;
+            setRead1NextHint(false);
             const thisIdx = cardIdx;
-            skipHandler = function () {
-                if (done) return;
-                done = true;
-                panel1.removeEventListener('click', skipHandler);
-                skipHandler = null;
-                body1.textContent = activePack.read1[thisIdx];
-                cardIdx = thisIdx + 1;
-                addT(runCard, 500);
+
+            tapHandler = function () {
+                if (!revealDone) {
+                    TextRevealController.abort();
+                    body1.textContent = activePack.read1[thisIdx];
+                    onCardTextReady(thisIdx);
+                    return;
+                }
+                if (waitAdvance) {
+                    panel1.removeEventListener('click', tapHandler);
+                    tapHandler = null;
+                    advanceToNextCard(thisIdx);
+                }
             };
-            panel1.addEventListener('click', skipHandler);
+            panel1.addEventListener('click', tapHandler);
+
             textReveal(body1, activePack.read1[thisIdx], 150, {}).then(function () {
-                if (done) return;
-                done = true;
-                panel1.removeEventListener('click', skipHandler);
-                skipHandler = null;
-                cardIdx = thisIdx + 1;
-                addT(runCard, 500);
+                if (revealDone) return;
+                onCardTextReady(thisIdx);
             });
         }
 
@@ -2538,8 +3470,11 @@
     }
 
     function startPhase2() {
-        document.getElementById('reading-p1').classList.add('hidden');
-        document.getElementById('reading-p2').classList.remove('hidden');
+        if (window._phase2Running) return;
+        window._phase2Running = true;
+        const navBtn = document.getElementById('explore-btn');
+        navBtn.classList.remove('reading-nav-visible');
+        navBtn.onclick = null;
         const layer2 = document.getElementById('read2-layer');
         const body2 = document.getElementById('read2-body');
         const panel2 = document.getElementById('read-text-2');
@@ -2551,13 +3486,7 @@
         cwrap.style.transition = '';
         layer2.innerHTML = '';
         body2.innerHTML = '';
-        ['rm2-1', 'rm2-2', 'rm2-3'].forEach(function (id) {
-            const el = document.getElementById(id);
-            el.style.transition = 'border-color 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease';
-            el.style.borderColor = '#D8D0BE';
-            el.style.opacity = '0.3';
-            el.style.boxShadow = 'none';
-        });
+        resetReadingCards('rm2-');
 
         const read2Str = activePack.read2Body;
         const tokens = tokenizeRead2(read2Str);
@@ -2568,33 +3497,41 @@
         function highlightCard(n) {
             for (let i = 1; i <= 3; i++) {
                 const el = document.getElementById('rm2-' + i);
-                if (i <= n) {
-                    el.style.borderColor = '#B3A38D';
-                    el.style.opacity = '1';
-                    el.style.boxShadow = '0 4px 14px color-mix(in srgb, #B3A38D 45%, transparent)';
+                el.classList.remove('reading-card-active', 'reading-card-lit', 'reading-card-inactive');
+                if (i < n) {
+                    el.classList.add('reading-card-lit');
+                } else if (i === n) {
+                    el.classList.add('reading-card-lit', 'reading-card-active');
                 } else {
-                    el.style.borderColor = '#D8D0BE';
-                    el.style.opacity = '0.3';
-                    el.style.boxShadow = 'none';
+                    el.classList.add('reading-card-inactive');
                 }
+            }
+        }
+
+        function phase2ContentComplete() {
+            if (readingNavLayer === 2) {
+                showReadingNavBtn(function () {
+                    endPhase2Anim();
+                }, '体悟整体');
             }
         }
 
         function flushSkip() {
             skipped = true;
+            body2.innerHTML = '';
             timers2.forEach(clearTimeout);
             timers2 = [];
             body2.innerHTML = read2Str.replace(/隐者|宝剑三|星星/g, function (m) {
                 return '<span class="highlight-name">' + m + '</span>';
             });
             highlightCard(3);
-            addT(endPhase2Anim, 2000);
+            phase2ContentComplete();
         }
 
         function step() {
             if (skipped || ti >= tokens.length) {
                 if (!skipped) highlightCard(3);
-                if (!skipped) addT(endPhase2Anim, 2000);
+                if (!skipped) phase2ContentComplete();
                 return;
             }
             const tok = tokens[ti++];
@@ -2619,20 +3556,21 @@
         panel2.onclick = function () { if (!skipped) flushSkip(); };
 
         function endPhase2Anim() {
+            if (readingNavLayer !== 2) return;
             panel2.onclick = null;
             cwrap.style.transition = 'all 1s ease';
             cwrap.style.transform = 'scale(0.8) translateY(-40px)';
             cwrap.style.opacity = '0';
             addT(function () {
-                document.getElementById('reading-p1').classList.add('hidden');
-                document.getElementById('reading-p2').classList.add('hidden');
-                startPhase3();
+                if (readingNavLayer !== 2) return;
+                goReadingLayer3();
             }, 900);
         }
 
         textReveal(layer2, READ2_LAYER, 150, {}).then(function () {
             step();
         });
+        window._phase2Running = false;
     }
 
     function tokenizeRead2(str) {
@@ -2657,7 +3595,9 @@
     }
 
     function startPhase3() {
-        document.getElementById('reading-p3').classList.remove('hidden');
+        const navBtn = document.getElementById('explore-btn');
+        navBtn.classList.remove('reading-nav-visible');
+        navBtn.onclick = null;
         const wrap3 = document.getElementById('read3-wrap');
         const spot = document.getElementById('read3-spotlight');
         const flo = document.getElementById('read3-float');
@@ -2709,10 +3649,17 @@
             addT(cb, 1280);
         }
 
+        function phase3ContentComplete() {
+            if (readingNavLayer === 3) {
+                showReadingNavBtn(function () {
+                    runRead3ExitThen(finishToArchive);
+                }, '生成共识');
+            }
+        }
+
         function skipPhase3() {
             if (localSkip) return;
             localSkip = true;
-            wrap3.onclick = null;
             TextRevealController.abort();
             clearRead3Ambient();
             read3CondenseVisibleChars(t3);
@@ -2722,9 +3669,7 @@
                 t3.innerHTML = read3FullHighlightedHtml();
                 t3.classList.add('read3-breathe', 'read3-text--full');
                 flo.classList.add('read3-float-idle');
-                addT(function () {
-                    runRead3ExitThen(finishToArchive);
-                }, 820);
+                phase3ContentComplete();
             }, 220);
         }
 
@@ -2744,9 +3689,7 @@
                 flo.classList.add('read3-float-idle');
                 spot.classList.add('read3-spotlight--expand');
                 updateRead3Spotlight(wrap3, 1, activePack.read3Paras.length - 1);
-                addT(function () {
-                    runRead3ExitThen(finishToArchive);
-                }, 2200);
+                phase3ContentComplete();
                 return;
             }
             const row = document.createElement('div');
@@ -2770,73 +3713,148 @@
         addT(function () { runPara(0); }, 400);
     }
 
-    /* ---------- 8 承接 + 命名 ---------- */
+    /* ---------- 8 第六阶段情绪承接 + 第七阶段共识命名 ---------- */
     let archivePhase = 'emotional';
 
+    const EMOTIONAL_BRIDGE_S1 = '你所经历的这些，是真实存在的。';
+    const EMOTIONAL_BRIDGE_S2 = '它值得被认真对待。';
+    const EMOTIONAL_CHAR_MS = 180;
+    const EMOTIONAL_PAUSE_MS = 1200;
+    const EMOTIONAL_HOLD_MS = 3000;
+
     function initArchive() {
-        namingSeq += 1;
+        if (reviewRestore === 'archive-naming') {
+            reviewRestore = null;
+            restoreArchiveNamingFull();
+            return;
+        }
+        emotionalBridgeSeq += 1;
+        const runId = emotionalBridgeSeq;
         activePack = getActivePack();
         archivePhase = 'emotional';
-        document.getElementById('archive-emotional').classList.remove('hidden');
-        document.getElementById('archive-naming').classList.add('hidden');
-        const et = document.getElementById('archive-emotional-text');
-        et.innerHTML = '';
-        et.style.opacity = '1';
-        et.style.transform = 'none';
-        et.classList.remove('firefly-soft');
-        const p1 = namingFormat('你所经历的这些，是真实存在的');
-        const p2 = '\n' + namingFormat('它值得被认真对待');
-        const root = document.getElementById('app-root');
-        let navigated = false;
 
-        function goNaming() {
-            if (navigated) return;
-            navigated = true;
-            document.getElementById('archive-emotional').classList.add('hidden');
-            document.getElementById('archive-naming').classList.remove('hidden');
+        const page = document.getElementById('page-archive');
+        const scene = document.getElementById('archive-emotional');
+        const naming = document.getElementById('archive-naming');
+        const et = document.getElementById('archive-emotional-text');
+
+        const bridge = {
+            hasNavigated: false,
+            isFinished: false,
+            exitScheduled: false
+        };
+
+        function ok() {
+            return runId === emotionalBridgeSeq;
+        }
+
+        function detach() {
+            et.onclick = null;
+            TextRevealController.abort();
+        }
+
+        function showFullCopy() {
+            et.innerHTML = EMOTIONAL_BRIDGE_S1 + '<br>' + EMOTIONAL_BRIDGE_S2;
+            et.classList.add('emotional-bridge-done');
+        }
+
+        function onComplete() {
+            if (!ok()) return;
+            if (bridge.hasNavigated) return;
+            bridge.hasNavigated = true;
+            detach();
+            scene.classList.add('hidden');
+            naming.classList.remove('hidden');
+            archivePhase = 'naming';
             runNamingSequence();
         }
 
+        function runExit() {
+            if (!ok() || bridge.hasNavigated || bridge.exitScheduled) return;
+            bridge.exitScheduled = true;
+            et.classList.remove('emotional-breathe');
+            page.style.transition = 'background-color 1.2s ease';
+            page.style.backgroundColor = '#404040';
+            et.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+            et.style.opacity = '0';
+            et.style.transform = 'scale(0.92)';
+            addT(function () {
+                if (!ok()) return;
+                page.style.backgroundColor = '#606060';
+                page.style.transition = '';
+                et.style.transition = '';
+                et.style.transform = '';
+                onComplete();
+            }, 1200);
+        }
+
+        function afterRevealHold() {
+            if (!ok() || bridge.hasNavigated) return;
+            et.classList.add('emotional-breathe');
+            addT(function () {
+                if (!ok() || bridge.hasNavigated) return;
+                runExit();
+            }, EMOTIONAL_HOLD_MS);
+        }
+
+        function onRevealFinished() {
+            if (!ok() || bridge.hasNavigated) return;
+            bridge.isFinished = true;
+            afterRevealHold();
+        }
+
+        scene.classList.remove('hidden');
+        naming.classList.add('hidden');
+        page.style.backgroundColor = '#606060';
+        page.style.transition = '';
+
+        et.innerHTML = '';
+        et.className = 'emotional-bridge-text';
+        et.classList.remove('emotional-breathe', 'emotional-bridge-done', 'firefly-soft');
+        et.style.opacity = '';
+        et.style.transform = '';
+        et.style.transition = '';
+
         et.onclick = function () {
-            if (navigated) return;
-            navigated = true;
+            if (bridge.hasNavigated) return;
             TextRevealController.abort();
-            et.innerHTML = '你所经历的这些<br>是真实存在的<br>它值得被认真对待';
-            et.style.opacity = '0.9';
-            addT(goNaming, 500);
+            showFullCopy();
+            bridge.isFinished = true;
+            if (bridge.exitScheduled) return;
+            et.classList.remove('emotional-breathe');
+            afterRevealHold();
         };
 
         addT(function () {
-            textReveal(et, p1, 150, {}).then(function () {
-                if (navigated) return;
+            if (!ok()) return;
+            textReveal(et, EMOTIONAL_BRIDGE_S1, EMOTIONAL_CHAR_MS, { extraCharClass: 'emotional-char' }).then(function () {
+                if (!ok() || bridge.hasNavigated) return;
                 addT(function () {
-                    textReveal(et, p2, 150, { append: true }).then(function () {
-                        if (navigated) return;
-                        et.classList.add('firefly-soft');
-                        addT(function () {
-                            if (navigated) return;
-                            root.style.backgroundColor = 'var(--color-bg-deep)';
-                            et.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
-                            et.style.opacity = '0';
-                            et.style.transform = 'scale(0.92)';
-                            addT(function () {
-                                root.style.backgroundColor = 'var(--color-bg)';
-                                goNaming();
-                            }, 1200);
-                        }, 3000);
+                    if (!ok() || bridge.hasNavigated) return;
+                    textReveal(et, EMOTIONAL_BRIDGE_S2, EMOTIONAL_CHAR_MS, {
+                        append: true,
+                        extraCharClass: 'emotional-char'
+                    }).then(function () {
+                        onRevealFinished();
                     });
-                }, 1200);
+                }, EMOTIONAL_PAUSE_MS);
             });
         }, 300);
+    }
+
+    function namingHaptic() {
+        if (navigator.vibrate) navigator.vibrate(40);
     }
 
     function runNamingSequence() {
         namingSeq += 1;
         const runId = namingSeq;
         const pack = getActivePack();
+
         function namingOk() {
             return runId === namingSeq;
         }
+
         function namingTick(fn, ms) {
             addT(function () {
                 if (!namingOk()) return;
@@ -2853,141 +3871,168 @@
         const p3 = document.getElementById('naming-p3');
         const btn = document.getElementById('naming-next');
         const dock = document.getElementById('naming-bottom-dock');
+        const guides = document.getElementById('naming-guides');
 
         TextRevealController.abort();
 
         p2.innerHTML = '';
-        p3.innerHTML = '';
-        p3.classList.add('hidden');
+        p3.textContent = namingFormat(pack.namingP3);
+        p3.classList.remove('naming-footnote-breathe');
+        p3.style.opacity = '0';
+        p3.style.transition = '';
+        guides.classList.add('naming-step-off');
         dock.classList.remove('naming-dock-visible');
         btn.classList.remove('naming-next--show');
-        dock.style.opacity = '';
-        dock.style.transition = '';
+        dock.style.opacity = '0';
+        dock.style.transition = 'opacity 1s ease';
+        btn.style.opacity = '0';
 
         load.style.display = 'block';
         load.style.opacity = '0.65';
         load.classList.remove('hidden');
         label.textContent = namingFormat(pack.namingLabel);
-        label.classList.add('hidden');
+        label.classList.add('naming-step-off');
+        label.style.display = 'block';
         label.style.opacity = '0';
-        sealW.classList.add('hidden');
-        p1.classList.add('hidden');
-        p2.classList.add('hidden');
+        label.style.transition = 'opacity 1s ease';
+        sealW.classList.add('naming-step-off');
+        sealW.style.opacity = '0';
+        p1.classList.add('naming-step-off');
+        p1.style.opacity = '0';
+        p2.classList.add('naming-step-off');
+        p2.style.opacity = '0';
         seal.classList.remove('seal-anim');
         void seal.offsetWidth;
 
+        /* Step 0：加载态 2s */
         namingTick(function () {
             load.style.display = 'none';
-            label.classList.remove('hidden');
-            label.style.display = 'block';
-            label.style.transition = 'opacity 1s ease';
+            /* Step 1：命名标签渐显 */
+            label.classList.remove('naming-step-off');
             void label.offsetWidth;
             label.style.opacity = '1';
         }, 2000);
 
+        /* Step 2：印章下压 + 触觉 */
         namingTick(function () {
-            sealW.classList.remove('hidden');
+            sealW.classList.remove('naming-step-off');
             sealW.style.transition = 'opacity 0.5s ease';
             sealW.style.opacity = '1';
             seal.style.opacity = '1';
             seal.classList.add('seal-anim');
-            if (navigator.vibrate) navigator.vibrate(40);
+            namingHaptic();
         }, 3600);
 
+        /* Step 3a：「此刻的共识已归档。」整体浮现 */
         namingTick(function () {
-            p1.classList.remove('hidden');
-            p1.style.transition = 'opacity 0.6s ease';
+            guides.classList.remove('naming-step-off');
+            p1.classList.remove('naming-step-off');
+            p1.style.transition = 'opacity 0.8s ease';
+            void p1.offsetWidth;
             p1.style.opacity = '0.8';
         }, 4300);
 
+        /* Step 3b–3c：引导语逐字 + 脚注整体浮现 */
         namingTick(function () {
-            p2.classList.remove('hidden');
+            p2.classList.remove('naming-step-off');
             p2.style.opacity = '0.8';
             textReveal(p2, namingFormat(pack.namingP2a), 150, {}).then(function () {
                 if (!namingOk()) return Promise.resolve();
                 return textReveal(p2, namingFormat(pack.namingP2b), 150, { append: true });
             }).then(function () {
-                if (!namingOk()) return Promise.resolve();
-                p3.classList.remove('hidden');
-                p3.style.opacity = '0.85';
-                return textReveal(p3, namingFormat(pack.namingP3), 150, {});
-            }).then(function () {
                 if (!namingOk()) return;
-                dock.classList.add('naming-dock-visible');
-                dock.style.opacity = '0';
-                void dock.offsetWidth;
-                dock.style.transition = 'opacity 0.55s ease';
-                requestAnimationFrame(function () {
-                    if (!namingOk()) return;
-                    dock.style.opacity = '1';
-                    btn.classList.add('naming-next--show');
-                });
+                p3.classList.remove('naming-step-off');
+                p3.style.transition = 'opacity 0.9s ease';
+                void p3.offsetWidth;
+                p3.style.opacity = '0.5';
+                p3.classList.add('naming-footnote-breathe');
+                /* Step 4：1s 后箭头淡入 */
+                namingTick(function () {
+                    dock.classList.remove('naming-step-off');
+                    dock.classList.add('naming-dock-visible');
+                    void dock.offsetWidth;
+                    requestAnimationFrame(function () {
+                        if (!namingOk()) return;
+                        dock.style.opacity = '1';
+                        btn.style.opacity = '1';
+                        btn.classList.add('naming-next--visible');
+                    });
+                }, 1000);
             });
         }, 4700);
 
-        btn.onclick = function () { goToPage('page-end', 'fade'); };
+        btn.onclick = function () {
+            if (!namingOk()) return;
+            goToPage('page-end', 'fade');
+        };
     }
 
-    /* ---------- 9 结束 ---------- */
+    /* ---------- 9 第八阶段结束页（60% 时间轴 / 25% 文案 / 15% 按钮） ---------- */
     function initEnd() {
-        const p1 = document.getElementById('end-p1');
-        const p2 = document.getElementById('end-p2');
-        const tw = document.getElementById('timeline-wrap');
-        const line = document.getElementById('flow-line');
-        const pt = document.getElementById('light-point');
-        const tip = document.getElementById('point-tip');
+        endSeq += 1;
+        const runId = endSeq;
         const pack = getActivePack();
-        if (tip) tip.textContent = pack.endTip;
 
-        p1.style.opacity = p2.style.opacity = '0';
-        p2.style.transform = 'scale(1)';
-        tw.style.opacity = '0';
-        line.classList.remove('lit');
-        pt.style.left = '50%';
-        pt.style.top = '20%';
-        pt.style.transform = 'translate(-50%, -50%)';
-        pt.classList.remove('show-tip');
+        function ok() {
+            return runId === endSeq;
+        }
+
+        buildEndTimelineGeometry();
+        resetEndScreenUI();
+
+        const path = document.getElementById('end-sine-path');
+        const n1 = document.getElementById('end-node-1');
+        const n2 = document.getElementById('end-node-2');
+        const drop = document.getElementById('end-drop-light');
+        const tipCur = document.getElementById('end-tip-current');
+        const copy = document.getElementById('end-copy-text');
+
+        if (tipCur) tipCur.textContent = pack.endTip || pack.namingLabel;
+        if (copy) copy.innerHTML = END_SCREEN_COPY.split('\n').join('<br>');
+
+        void path.offsetWidth;
+        path.classList.add('end-sine-drawn');
+
+        /* Step 1：曲线延展 + 过去节点依次淡入（间隔 400ms） */
+        addT(function () {
+            if (!ok()) return;
+            n1.classList.add('end-node-visible');
+        }, END_ANIM.NODE1_MS);
 
         addT(function () {
-            tw.style.transition = 'opacity 1s ease';
-            tw.style.opacity = '1';
-        }, 400);
+            if (!ok()) return;
+            n2.classList.add('end-node-visible');
+        }, END_ANIM.NODE2_MS);
 
+        /* Step 2：当前光点自上方降落至波峰 */
         addT(function () {
-            pt.style.transition = 'top 1.1s cubic-bezier(0.4,0,0.2,1), left 2.8s cubic-bezier(0.25,0.75,0.25,1)';
-            pt.style.top = '50%';
-        }, 900);
+            if (!ok()) return;
+            const landLeft = drop.dataset.landLeft || '82%';
+            const landTop = drop.dataset.landTop || '50%';
+            drop.style.opacity = '1';
+            void drop.offsetWidth;
+            drop.style.left = landLeft;
+            drop.style.top = landTop;
+            drop.classList.add('end-drop-landed');
+        }, END_ANIM.DROP_MS);
 
+        /* Step 3：金色提示框 + 价值观文案整体淡入 */
         addT(function () {
-            line.classList.add('lit');
-        }, 2000);
-
-        addT(function () {
-            pt.style.left = '28%';
-        }, 2400);
-
-        addT(function () {
-            p1.style.transition = 'opacity 1.1s ease';
-            p1.style.opacity = '1';
-        }, 2600);
-
-        addT(function () {
-            p2.style.transition = 'opacity 1s ease, transform 1s ease';
-            p2.style.opacity = '1';
-            p2.style.transform = 'scale(1.03)';
-        }, 4100);
-
-        function showTip() { pt.classList.add('show-tip'); }
-        function hideTip() { pt.classList.remove('show-tip'); }
-
-        pt.addEventListener('mousedown', showTip);
-        pt.addEventListener('mouseup', hideTip);
-        pt.addEventListener('mouseleave', hideTip);
-        pt.addEventListener('touchstart', function (e) { e.preventDefault(); showTip(); }, { passive: false });
-        pt.addEventListener('touchend', hideTip);
+            if (!ok()) return;
+            endRevealCurrentNode();
+            /* Step 4：时间轴/节点/文案全部完成后 1s，底部淡入「结束」闭环按钮 */
+            addT(function () {
+                if (!ok()) return;
+                showEndFinishButton(ok);
+            }, END_ANIM.FINISH_DELAY_MS);
+        }, END_ANIM.REVEAL_MS);
     }
 
     window.addEventListener('load', function () {
+        wirePhaseBackTouch();
+        document.getElementById('reading-back-btn').onclick = phaseBackFromReading;
+        document.getElementById('archive-back-btn').onclick = phaseBackFromArchive;
+        document.getElementById('end-back-btn').onclick = phaseBackFromEnd;
         onEnter('page-welcome');
     });
 })();
