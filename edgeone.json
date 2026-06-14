@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/chat",
+        "destination": "https://xuanxueguanj-d1gqigshx7bea6517-1443299402.ap-shanghai.app.tcloudbase.com/chat"
+      }
+    ]
+  }
