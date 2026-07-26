@@ -5182,12 +5182,6 @@
                     </div>
                 </div>
 
-                <!-- 本周共识命名预览 -->
-                <div class="profile-divider"></div>
-                <div class="consensus-card" id="consensus-card">
-                    <!-- 由 JS 动态渲染三种状态 -->
-                </div>
-
                 <div class="profile-divider"></div>
 
                 <!-- 我的轨迹入口 -->
@@ -8236,6 +8230,9 @@
 
         btn.onclick = function () {
             if (!namingOk()) return;
+            try {
+                saveTarotSession(selectedDirection, userQuery, global_consensus_name || '');
+            } catch (e) {}
             goToPage('page-end', 'fade');
         };
 
@@ -8859,7 +8856,15 @@
             avatarInput.value = '';
         };
 
-        renderProfileConsensus();
+        /* 更新记录天数徽章 */
+        (function () {
+            var records = loadAllRecords();
+            var uniqueDays = {};
+            records.forEach(function (r) { uniqueDays[r.date] = true; });
+            var dayCount = Object.keys(uniqueDays).length;
+            var badge = document.getElementById('profile-badge');
+            if (badge) badge.textContent = '已记录 ' + dayCount + ' 天';
+        })();
     }
 
     /* 加载个人资料 */
@@ -9136,270 +9141,6 @@
         }
         cancelBtn.onclick = closeDate;
         overlay.onclick = closeDate;
-    }
-
-    /* 渲染本周共识命名预览（三种状态） */
-    function renderProfileConsensus() {
-        var records = loadAllRecords();
-        var card = document.getElementById('consensus-card');
-        var badge = document.getElementById('profile-badge');
-
-        /* 计算总记录天数 */
-        var uniqueDays = {};
-        records.forEach(function (r) { uniqueDays[r.date] = true; });
-        var dayCount = Object.keys(uniqueDays).length;
-        if (badge) badge.textContent = '已记录 ' + dayCount + ' 天';
-
-        if (records.length === 0) {
-            card.innerHTML = '<div class="consensus-empty">暂无记录</div>';
-            return;
-        }
-
-        var now = new Date();
-        var weekStart = getWeekStart(now);
-        var weekEnd = new Date(weekStart.getTime() + 7 * 86400000);
-        var thisWeekTarots = records.filter(function (r) {
-            return r.type === 'tarot' && r.timestamp >= weekStart.getTime() && r.timestamp < weekEnd.getTime();
-        });
-
-        var html = '';
-        var hasConsensus = thisWeekTarots.length > 0 && getWeekConsensusName(weekStart);
-
-        if (hasConsensus) {
-            /* 状态二：已满一周 — 检查是否触发凝聚动画 */
-            var animKey = 'guanji_anim_week_' + getWeekKey(weekStart);
-            var animPlayed = localStorage.getItem(animKey);
-            if (!animPlayed && now.getTime() >= weekEnd.getTime()) {
-                renderWeekEndAnimation(card, weekStart);
-                localStorage.setItem(animKey, '1');
-                return;
-            }
-            var consensusName = getWeekConsensusName(weekStart);
-            var summary = getWeekSummary(weekStart);
-            html += '<div class="consensus-week-name consensus-fade-stagger" style="opacity:0;">' + escHtml(consensusName) + '</div>';
-            html += '<div class="consensus-week-summary consensus-fade-stagger" style="opacity:0;">' + escHtml(summary.text || '') + '</div>';
-            if (summary.keywords && summary.keywords.length > 0) {
-                html += '<div class="consensus-week-tags consensus-fade-stagger" style="opacity:0;">';
-                summary.keywords.slice(0, 3).forEach(function (kw) {
-                    html += '<span class="consensus-week-tag">' + escHtml(kw) + '</span>';
-                });
-                html += '</div>';
-            }
-            html += '<div class="consensus-week-hint consensus-fade-stagger" id="consensus-week-hint" style="opacity:0;">查看本周轨迹 →</div>';
-            renderConsensusCard(card, html, weekStart);
-        } else if (thisWeekTarots.length > 0) {
-            /* 状态一：不满一周 */
-            html += '<div class="consensus-status consensus-fade-stagger" style="opacity:0;"><span class="consensus-status-dot"></span>本周正在凝聚中</div>';
-            thisWeekTarots.forEach(function (r, idx) {
-                var label = r.namingLabel || '第' + (idx + 1) + '次映照';
-                var dateStr = r.date;
-                html += '<div class="consensus-tag consensus-fade-stagger" data-idx="' + idx + '" style="opacity:0;">' +
-                    '<span>' + escHtml(label) + '</span>' +
-                    '<span class="consensus-tag-date">' + dateStr + '</span>' +
-                    '</div>';
-            });
-            html += '<div class="consensus-guide consensus-fade-stagger" style="opacity:0;">每一次记录，都会成为未来理解自己的线索</div>';
-            card.innerHTML = html;
-            card.onclick = null;
-            card.style.cursor = '';
-
-            card.querySelectorAll('.consensus-tag').forEach(function (el, idx) {
-                el.onclick = function () {
-                    var record = thisWeekTarots[idx];
-                    if (record) openRecordDetail(record);
-                };
-            });
-        } else {
-            /* 状态三：无记录 */
-            var emptyMsg = records.some(function (r) { return r.type === 'tarot'; }) ?
-                '这一周，安静地流过。' : '暂无本周记录';
-            html += '<div class="consensus-empty">' + emptyMsg + '</div>';
-            card.innerHTML = html;
-            card.onclick = null;
-            card.style.cursor = '';
-            return;
-        }
-
-        /* 墨迹晕开效果入场动画 */
-        var staggerEls = card.querySelectorAll('.consensus-fade-stagger');
-        if (staggerEls.length > 0) {
-            addT(function () {
-                staggerEls[0].style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-                staggerEls[0].style.transform = 'translateY(2px)';
-                staggerEls[0].style.opacity = '1';
-                requestAnimationFrame(function () {
-                    staggerEls[0].style.transform = 'translateY(0)';
-                });
-            }, 200);
-            for (var i = 1; i < staggerEls.length; i++) {
-                (function (idx) {
-                    addT(function () {
-                        staggerEls[idx].style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-                        staggerEls[idx].style.transform = 'translateY(2px)';
-                        staggerEls[idx].style.opacity = '1';
-                        requestAnimationFrame(function () {
-                            staggerEls[idx].style.transform = 'translateY(0)';
-                        });
-                    }, 200 + idx * 150);
-                })(i);
-            }
-        }
-    }
-
-    /* 辅助：渲染已完成的共识卡片 */
-    function renderConsensusCard(card, html, weekStart) {
-        card.innerHTML = html;
-        card.onclick = function () { goToPage('page-trajectory', 'fade'); };
-        card.style.cursor = 'pointer';
-        var hint = document.getElementById('consensus-week-hint');
-        if (hint) {
-            hint.onclick = function (e) { e.stopPropagation(); goToPage('page-trajectory', 'fade'); };
-        }
-    }
-
-    /* 一周结束凝聚动画（三段式） */
-    var _animAborted = false;
-
-    function renderWeekEndAnimation(card, weekStart) {
-        _animAborted = false;
-        var consensusName = getWeekConsensusName(weekStart);
-        var summary = getWeekSummary(weekStart);
-
-        card.innerHTML = '<div class="consensus-anim-container" id="consensus-anim-container">' +
-            '<div class="consensus-anim-dot" id="anim-dot"></div>' +
-            '<div class="consensus-anim-hint" id="anim-hint" style="text-align:center;margin-top:40px;font-size:13px;color:#B3A38D;">本周的共识已归档。</div>' +
-            '</div>';
-        card.onclick = function () {
-            _animAborted = true;
-            clearTimers();
-            goToPage('page-trajectory', 'fade');
-        };
-        card.style.cursor = 'pointer';
-
-        var container = document.getElementById('consensus-anim-container');
-        var dot = document.getElementById('anim-dot');
-
-        /* 第一段：凝结核显现 (0-1200ms) */
-        /* 光点脉动 */
-        addT(function () {
-            if (_animAborted) return;
-            dot.style.transition = 'all 0.3s ease';
-            dot.style.width = '10px';
-            dot.style.height = '10px';
-            dot.style.opacity = '1';
-        }, 0);
-        addT(function () {
-            if (_animAborted) return;
-            dot.style.width = '4px';
-            dot.style.height = '4px';
-        }, 300);
-        addT(function () {
-            if (_animAborted) return;
-            dot.style.width = '10px';
-            dot.style.height = '10px';
-        }, 600);
-        addT(function () {
-            if (_animAborted) return;
-            dot.style.width = '4px';
-            dot.style.height = '4px';
-        }, 900);
-
-        /* 光线扩散（模拟3-6条光线） */
-        var rayCount = 4;
-        for (var i = 0; i < rayCount; i++) {
-            (function (idx) {
-                var angle = (idx / rayCount) * 360;
-                var ray = document.createElement('div');
-                ray.className = 'consensus-anim-ray';
-                ray.style.transform = 'translate(-50%, -50%) rotate(' + angle + 'deg)';
-                ray.style.transformOrigin = 'center top';
-                container.appendChild(ray);
-
-                addT(function () {
-                    if (_animAborted) return;
-                    ray.style.transition = 'all 0.6s ease';
-                    ray.style.height = '40px';
-                    ray.style.opacity = '0.6';
-                }, 200);
-                addT(function () {
-                    if (_animAborted) return;
-                    ray.style.transition = 'all 0.6s ease';
-                    ray.style.height = '0';
-                    ray.style.opacity = '0';
-                }, 800);
-            })(i);
-        }
-
-        /* 第二段：标签定格 (1200-1800ms) */
-        addT(function () {
-            if (_animAborted) return;
-            /* 波纹扩散 */
-            var ripple = document.createElement('div');
-            ripple.className = 'consensus-anim-ripple';
-            container.appendChild(ripple);
-            ripple.style.transition = 'all 0.4s ease';
-            ripple.style.width = '0';
-            ripple.style.height = '0';
-            ripple.style.opacity = '0.3';
-            requestAnimationFrame(function () {
-                ripple.style.width = '120px';
-                ripple.style.height = '120px';
-                ripple.style.opacity = '0';
-            });
-
-            /* 阶段名称出现 */
-            var nameEl = document.createElement('div');
-            nameEl.className = 'consensus-week-name consensus-anim-name';
-            nameEl.textContent = consensusName;
-            container.insertBefore(nameEl, container.firstChild);
-
-            requestAnimationFrame(function () {
-                nameEl.classList.add('show');
-            });
-
-            /* 竖线动画 */
-            var lineEl = nameEl.querySelector('::before');
-            /* 用JS模拟竖线 */
-            nameEl.style.position = 'relative';
-            nameEl.style.paddingLeft = '16px';
-            var lineDiv = document.createElement('div');
-            lineDiv.className = 'consensus-anim-line';
-            lineDiv.style.position = 'absolute';
-            lineDiv.style.left = '0';
-            lineDiv.style.top = '50%';
-            lineDiv.style.transform = 'translateY(-50%)';
-            nameEl.appendChild(lineDiv);
-
-            addT(function () {
-                if (_animAborted) return;
-                lineDiv.style.height = '22px';
-            }, 100);
-        }, 1200);
-
-        /* 第三段：提示浮现与结束 (1800-3200ms) */
-        addT(function () {
-            if (_animAborted) return;
-            var hint = document.getElementById('anim-hint');
-            if (hint) hint.classList.add('show');
-        }, 1800);
-
-        addT(function () {
-            if (_animAborted) return;
-            var hint = document.getElementById('anim-hint');
-            if (hint) hint.classList.add('fade');
-            /* 显示最终状态 */
-            var finalHtml = '<div class="consensus-week-name">' + escHtml(consensusName) + '</div>';
-            finalHtml += '<div class="consensus-week-summary">' + escHtml(summary.text || '') + '</div>';
-            if (summary.keywords && summary.keywords.length > 0) {
-                finalHtml += '<div class="consensus-week-tags">';
-                summary.keywords.slice(0, 3).forEach(function (kw) {
-                    finalHtml += '<span class="consensus-week-tag">' + escHtml(kw) + '</span>';
-                });
-                finalHtml += '</div>';
-            }
-            finalHtml += '<div class="consensus-week-hint" id="consensus-week-hint">查看本周轨迹 →</div>';
-            renderConsensusCard(card, finalHtml, weekStart);
-        }, 3200);
     }
 
     /* 获取周一起始时间 */
