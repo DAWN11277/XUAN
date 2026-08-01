@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
         :root {
             --color-bg: #606060;
             --color-primary: #D8D0BE;
@@ -28,6 +30,7 @@
 
         html, body {
             height: 100%;
+            height: 100dvh;
             overflow: hidden;
         }
 
@@ -38,7 +41,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100dvh;
         }
 
         .en, .tarot-en {
@@ -51,10 +54,8 @@
             width: 100%;
             max-width: 430px;
             margin: 0 auto;
-            min-height: 100vh;
             height: 100vh;
-            max-height: 100vh;
-            aspect-ratio: 9 / 19.5;
+            height: 100dvh;
             background: var(--color-bg);
             overflow: hidden;
             display: flex;
@@ -62,6 +63,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            box-sizing: border-box;
             transition: background-color 1.2s ease, filter 1.2s ease;
         }
 
@@ -1879,6 +1881,126 @@
             opacity: 0.35;
             margin-top: 4px;
         }
+        /* ===== 塔罗详情页新样式 ===== */
+        .rd-naming-label {
+            font-size: 20px;
+            font-weight: 600;
+            color: #D8D0BE;
+            opacity: 0.9;
+            letter-spacing: 0.08em;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .rd-naming-sub {
+            font-size: 12px;
+            color: #B3A38D;
+            opacity: 0.5;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .rd-section {
+            margin-bottom: 18px;
+        }
+        .rd-section-title {
+            font-size: 13px;
+            color: #B3A38D;
+            opacity: 0.7;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            padding-left: 1px;
+        }
+        .rd-cards-row {
+            display: flex;
+            gap: 8px;
+        }
+        .rd-card-tag {
+            flex: 1;
+            background: rgba(216,208,190,0.04);
+            border: 1px solid rgba(216,208,190,0.08);
+            border-radius: 6px;
+            padding: 10px 6px;
+            text-align: center;
+        }
+        .rd-card-tag-slot {
+            display: block;
+            font-size: 10px;
+            color: #B3A38D;
+            opacity: 0.5;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .rd-card-tag-name {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #D8D0BE;
+            opacity: 0.85;
+            letter-spacing: 0.05em;
+        }
+        .rd-card-tag-symbols {
+            display: block;
+            font-size: 10px;
+            color: #B3A38D;
+            opacity: 0.45;
+            letter-spacing: 0.04em;
+            margin-top: 4px;
+        }
+        .rd-read1-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(216,208,190,0.05);
+        }
+        .rd-read1-item:last-child {
+            border-bottom: none;
+        }
+        .rd-read1-label {
+            display: inline-block;
+            font-size: 11px;
+            color: #B3A38D;
+            opacity: 0.6;
+            letter-spacing: 0.06em;
+            background: rgba(179,163,141,0.08);
+            padding: 2px 10px;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+        .rd-read1-text {
+            font-size: 14px;
+            color: #D8D0BE;
+            opacity: 0.8;
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+        }
+        .rd-read2-text {
+            font-size: 14px;
+            color: #D8D0BE;
+            opacity: 0.78;
+            line-height: 1.8;
+            letter-spacing: 0.04em;
+        }
+        .rd-read3-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .rd-read3-para {
+            font-size: 13px;
+            color: #D8D0BE;
+            opacity: 0.7;
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+            padding-left: 12px;
+            border-left: 2px solid rgba(179,163,141,0.2);
+        }
+        .rd-date {
+            text-align: center;
+            font-size: 11px;
+            color: #D8D0BE;
+            opacity: 0.3;
+            letter-spacing: 0.05em;
+            margin-top: 24px;
+            padding-bottom: 20px;
+        }
         .wd-record-actions {
             display: flex;
             gap: 16px;
@@ -2471,14 +2593,14 @@
             text-align: center !important;
             overflow: hidden !important;
             padding: 0 !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
         }
 
         #page-reading #reading-p3.interpret-panel-read3 {
             padding-top: 0 !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
             overflow: hidden !important;
         }
 
@@ -2663,7 +2785,7 @@
 
         #page-reading #reading-p3 .interpret-final-wrap.read3-meditation {
             height: 100% !important;
-            max-height: 100vh !important;
+            max-height: 100dvh !important;
             overflow: hidden !important;
             padding-top: 48px !important;
             box-sizing: border-box !important;
@@ -4365,8 +4487,8 @@
             background: #606060 !important;
             overflow: hidden !important;
             padding: 0 !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
         }
 
         #page-end .end-layout {
@@ -5335,7 +5457,7 @@
                 <div>感谢你的参与</div>
                 <button id="close-feishu-form" style="background:none;border:none;color:#D8D0BE;font-size:24px;cursor:pointer;">×</button>
             </div>
-            <iframe src="https://bcncjae7suqa.feishu.cn/share/base/form/shrcnwZ41orLvWgsm4hpmgXoOce" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
+            <iframe src="https://bcncjae7suqa.feishu.cn/share/base/form/shrcnwZ41orLvWgsm4hpmgXoOce" style="width:100%;height:calc(100dvh - 60px);border:none;"></iframe>
         </div>
     </div>
 
@@ -8778,11 +8900,20 @@
         var records = loadAllRecords();
         var now = new Date();
         var dateStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+        var pack = getActivePack();
+        /* 收集牌组数据 */
+        var cards = drawnCards.map(function (c) {
+            return { name: c.name, slot: c.slot || '', symbol: c.symbol || [] };
+        });
         records.push({
             type: 'tarot',
             direction: direction,
             query: query,
             namingLabel: namingLabel,
+            cards: cards,
+            read1: pack ? pack.read1.slice(0, 3) : [],
+            read2Body: pack ? pack.read2Body || '' : '',
+            read3Paras: pack ? (pack.read3Paras || []).slice(0, 4) : [],
             date: dateStr,
             timestamp: now.getTime()
         });
@@ -9997,11 +10128,65 @@
         var html = '';
 
         if (record.type === 'tarot') {
-            html += '<div class="wd-section-title">状态映照</div>';
-            html += '<div class="wd-text" style="font-size:18px;font-weight:600;">' + escHtml(record.namingLabel || '未命名') + '</div>';
-            if (record.direction) html += '<div class="wd-text" style="margin-top:8px;">方向：' + escHtml(record.direction) + '</div>';
-            if (record.query) html += '<div class="wd-text" style="margin-top:6px;">问题：' + escHtml(record.query) + '</div>';
-            html += '<div class="wd-text" style="margin-top:8px;font-size:13px;opacity:0.4;">' + record.date + '</div>';
+            /* 标题：共识命名 */
+            if (record.namingLabel) {
+                html += '<div class="rd-naming-label">' + escHtml(record.namingLabel) + '</div>';
+            }
+            html += '<div class="rd-naming-sub">' + escHtml(record.direction || '') + (record.query ? ' · ' + escHtml(record.query.slice(0, 30)) : '') + '</div>';
+
+            /* 所选牌组 */
+            if (record.cards && record.cards.length > 0) {
+                html += '<div class="rd-section">';
+                html += '<div class="rd-section-title">所选牌组</div>';
+                html += '<div class="rd-cards-row">';
+                record.cards.forEach(function (c) {
+                    html += '<div class="rd-card-tag">';
+                    html += '<span class="rd-card-tag-slot">' + escHtml(c.slot || '') + '</span>';
+                    html += '<span class="rd-card-tag-name">' + escHtml(c.name || '') + '</span>';
+                    if (c.symbol && c.symbol.length > 0) {
+                        html += '<span class="rd-card-tag-symbols">' + escHtml(c.symbol.slice(0, 2).join(' · ')) + '</span>';
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+                html += '</div>';
+            }
+
+            /* 解读一：单张解读 */
+            if (record.read1 && record.read1.length > 0) {
+                html += '<div class="rd-section">';
+                html += '<div class="rd-section-title">单独解读</div>';
+                var slotNames = ['状态', '行动', '干扰'];
+                record.read1.forEach(function (txt, i) {
+                    html += '<div class="rd-read1-item">';
+                    html += '<span class="rd-read1-label">' + escHtml(slotNames[i] || '') + '</span>';
+                    html += '<div class="rd-read1-text">' + escHtml(txt) + '</div>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+
+            /* 解读二：关联解读 */
+            if (record.read2Body) {
+                html += '<div class="rd-section">';
+                html += '<div class="rd-section-title">关联解读</div>';
+                html += '<div class="rd-read2-text">' + escHtml(record.read2Body) + '</div>';
+                html += '</div>';
+            }
+
+            /* 解读三：整体体悟 */
+            if (record.read3Paras && record.read3Paras.length > 0) {
+                html += '<div class="rd-section">';
+                html += '<div class="rd-section-title">整体体悟</div>';
+                html += '<div class="rd-read3-list">';
+                record.read3Paras.forEach(function (p) {
+                    html += '<div class="rd-read3-para">' + escHtml(p) + '</div>';
+                });
+                html += '</div>';
+                html += '</div>';
+            }
+
+            html += '<div class="rd-date">' + record.date + '</div>';
         } else {
             html += '<div class="wd-section-title">今日记录</div>';
             html += '<div class="wd-record-item" style="padding:0;border:none;">';
