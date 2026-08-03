@@ -281,7 +281,7 @@
             align-items: center;
             gap: 14px;
             background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(216,208,190,0.15);
+            border: 1.5px solid rgba(216,208,190,0.22);
             border-radius: 12px;
             padding: 16px 18px;
             cursor: pointer;
@@ -368,6 +368,7 @@
             width: 100%;
             padding: 1.5rem;
             overflow-y: auto;
+            min-height: 0; /* Android: 允许flex子元素收缩 */
         }
         .v2-content.scrollable {
             justify-content: flex-start;
@@ -378,8 +379,13 @@
             background: #606060;
             padding: 0;
             justify-content: flex-start;
+            overflow: hidden; /* Android: 显式限定高度，防止溢出 */
         }
         #page-today-record .page-header {
+            position: relative; /* Android: 占据文档流，防止重叠 */
+            left: auto; /* 移除绝对定位的偏移 */
+            right: auto;
+            width: 100%; /* 确保撑满宽度 */
             flex-shrink: 0;
         }
         #page-today-record .today-subtitle {
@@ -388,11 +394,12 @@
             opacity: 0.7;
             text-align: center;
             letter-spacing: 0.12em;
-            padding: 0 24px 24px;
+            padding: 0 24px 16px;
             flex-shrink: 0;
         }
         .today-body {
             flex: 1;
+            min-height: 0; /* Android: 允许flex子元素收缩 */
             overflow-y: auto;
             padding: 0 24px 32px;
             width: 100%;
@@ -422,7 +429,7 @@
             align-items: center;
             gap: 4px;
             padding: 10px 12px;
-            border: 1px solid rgba(216,208,190,0.2);
+            border: 1.5px solid rgba(216,208,190,0.25);
             cursor: pointer;
             transition: all 0.25s ease;
             color: #D8D0BE;
@@ -461,7 +468,7 @@
         }
         .today-cat-opt {
             padding: 8px 18px;
-            border: 1px solid rgba(216,208,190,0.2);
+            border: 1.5px solid rgba(216,208,190,0.25);
             cursor: pointer;
             transition: all 0.25s ease;
             color: #D8D0BE;
@@ -488,7 +495,7 @@
             display: block;
             min-height: 160px;
             background: rgba(0,0,0,0.10);
-            border: 1px solid rgba(216,208,190,0.3);
+            border: 1.5px solid rgba(216,208,190,0.35);
             padding: 14px 16px;
             color: #D8D0BE;
             font-size: 16px;
@@ -624,7 +631,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 14px 20px;
-            border-bottom: 1px solid rgba(216,208,190,0.08);
+            border-bottom: 1.5px solid rgba(216,208,190,0.14);
         }
         .time-picker-cancel,
         .time-picker-confirm {
@@ -731,7 +738,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(216,208,190,0.15);
+            border: 1.5px solid rgba(216,208,190,0.22);
             overflow: hidden;
             position: relative;
             cursor: pointer;
@@ -813,7 +820,7 @@
             display: flex;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(216,208,190,0.06);
+            border-bottom: 1.5px solid rgba(216,208,190,0.12);
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -876,7 +883,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            border-bottom: 1px solid rgba(216,208,190,0.08);
+            border-bottom: 1.5px solid rgba(216,208,190,0.14);
         }
         .picker-title {
             font-size: 16px;
@@ -922,7 +929,7 @@
             text-align: center;
             cursor: pointer;
             transition: opacity 0.25s, background 0.25s;
-            border-bottom: 1px solid rgba(216,208,190,0.04);
+            border-bottom: 1.5px solid rgba(216,208,190,0.10);
         }
         .slide-option:last-child {
             border-bottom: none;
@@ -1173,7 +1180,10 @@
             padding: 0;
         }
         .page-trajectory-screen .page-header {
-            border-bottom: 1px solid rgba(216,208,190,0.08);
+            width: 100%; /* Android: 在flex容器中确保撑满宽度 */
+            left: auto; /* 移除绝对定位的left偏移 */
+            right: auto;
+            border-bottom: 1.5px solid rgba(216,208,190,0.12); /* Android: 更高不透明度确保可见 */
             flex-shrink: 0;
             position: relative;
         }
@@ -1218,7 +1228,7 @@
             gap: 0;
             padding: 10px 0 0;
             flex-shrink: 0;
-            border-bottom: 1px solid rgba(216,208,190,0.08);
+            border-bottom: 1.5px solid rgba(216,208,190,0.12); /* Android: 更高不透明度确保可见 */
         }
         .trajectory-view-tab {
             font-size: 13px;
@@ -1241,6 +1251,7 @@
         /* 便利贴墙容器 */
         .trajectory-wall-wrap {
             flex: 1;
+            min-height: 0; /* Android: 允许flex子元素收缩 */
             overflow-y: auto;
             overflow-x: hidden;
             padding: 16px 0 40px;
@@ -1280,7 +1291,7 @@
         /* 便利贴 */
         .tw-sticky-note {
             background: rgba(216,208,190,0.06);
-            border: 1px solid rgba(216,208,190,0.12);
+            border: 1.5px solid rgba(216,208,190,0.18);
             border-radius: 0;
             padding: 14px 12px;
             cursor: pointer;
@@ -1344,7 +1355,7 @@
         }
         .tw-delete-overlay button {
             background: transparent;
-            border: 1px solid rgba(216,208,190,0.3);
+            border: 1.5px solid rgba(216,208,190,0.4);
             color: #D8D0BE;
             font-family: inherit;
             font-size: 12px;
@@ -1363,6 +1374,7 @@
         /* 时间轴容器 */
         .trajectory-timeline-wrap {
             flex: 1;
+            min-height: 0; /* Android: 允许flex子元素收缩 */
             position: relative;
             overflow-y: auto;
             overflow-x: hidden;
@@ -1613,6 +1625,7 @@
         /* 标签内容区 */
         .wd-tab-content {
             flex: 1;
+            min-height: 0; /* Android: 允许flex子元素收缩 */
             overflow-y: auto;
             overflow-x: hidden;
             padding: 16px 0 24px;
@@ -1726,7 +1739,7 @@
         }
         .wd-consensus-item {
             padding: 16px 0;
-            border-bottom: 1px solid rgba(216,208,190,0.06);
+            border-bottom: 1.5px solid rgba(216,208,190,0.12);
             cursor: pointer;
             transition: opacity 0.15s ease;
         }
@@ -1804,7 +1817,7 @@
         }
         .wd-note-item {
             padding: 12px 0;
-            border-bottom: 1px solid rgba(216,208,190,0.04);
+            border-bottom: 1.5px solid rgba(216,208,190,0.10);
             cursor: pointer;
             transition: opacity 0.15s ease;
         }
@@ -1917,7 +1930,7 @@
         .rd-card-tag {
             flex: 1;
             background: rgba(216,208,190,0.04);
-            border: 1px solid rgba(216,208,190,0.08);
+            border: 1.5px solid rgba(216,208,190,0.14);
             border-radius: 6px;
             padding: 10px 6px;
             text-align: center;
@@ -1948,7 +1961,7 @@
         }
         .rd-read1-item {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(216,208,190,0.05);
+            border-bottom: 1.5px solid rgba(216,208,190,0.10);
         }
         .rd-read1-item:last-child {
             border-bottom: none;
@@ -2009,7 +2022,7 @@
         }
         .wd-record-actions button {
             background: none;
-            border: 1px solid rgba(216,208,190,0.2);
+            border: 1.5px solid rgba(216,208,190,0.3);
             color: #D8D0BE;
             padding: 8px 24px;
             font-family: inherit;
@@ -5457,7 +5470,9 @@
                 <div>感谢你的参与</div>
                 <button id="close-feishu-form" style="background:none;border:none;color:#D8D0BE;font-size:24px;cursor:pointer;">×</button>
             </div>
-            <iframe src="https://bcncjae7suqa.feishu.cn/share/base/form/shrcnwZ41orLvWgsm4hpmgXoOce" style="width:100%;height:calc(100dvh - 60px);border:none;"></iframe>
+            <div id="feishu-iframe-wrap" style="width:100%;height:calc(100% - 60px);height:calc(100dvh - 60px);position:relative;">
+                <div id="feishu-loading" style="display:flex;align-items:center;justify-content:center;position:absolute;inset:0;color:#D8D0BE;opacity:0.4;font-size:14px;letter-spacing:0.08em;">问卷加载中...</div>
+            </div>
         </div>
     </div>
 
@@ -7597,6 +7612,14 @@
         }
         var feishuModal = document.getElementById('feishu-form-modal');
         if (feishuModal) feishuModal.style.display = 'none';
+        /* 清除 iframe */
+        var fWrap = document.getElementById('feishu-iframe-wrap');
+        if (fWrap) {
+            var oldIf = fWrap.querySelector('iframe');
+            if (oldIf) oldIf.remove();
+        }
+        var fLoad = document.getElementById('feishu-loading');
+        if (fLoad) fLoad.style.display = 'flex';
         goToPage('page-brand', 'fade');
     }
 
@@ -7626,12 +7649,58 @@
 
     function openFeishuForm() {
         const modal = document.getElementById('feishu-form-modal');
-        if (modal) modal.style.display = 'block';
+        if (!modal) return;
+        modal.style.display = 'block';
+
+        /* 动态创建 iframe，每次打开都强制重新加载 */
+        const wrap = document.getElementById('feishu-iframe-wrap');
+        if (!wrap) return;
+
+        /* 先清除旧 iframe */
+        var oldIframe = wrap.querySelector('iframe');
+        if (oldIframe) oldIframe.remove();
+
+        /* 显示加载状态 */
+        var loadingEl = document.getElementById('feishu-loading');
+        if (loadingEl) loadingEl.style.display = 'flex';
+
+        /* 带缓存破坏参数的新 iframe */
+        var iframe = document.createElement('iframe');
+        var baseUrl = 'https://bcncjae7suqa.feishu.cn/share/base/form/shrcnwZ41orLvWgsm4hpmgXoOce';
+        iframe.src = baseUrl + (baseUrl.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now();
+        iframe.style.cssText = 'width:100%;height:100%;border:none;position:relative;z-index:1;';
+        /* Android 兼容：sandbox 允许表单提交和脚本 */
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation');
+        iframe.setAttribute('allow', 'camera;microphone;geolocation');
+        iframe.setAttribute('loading', 'eager');
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+
+        /* iframe 加载完成后隐藏 loading */
+        iframe.onload = function () {
+            if (loadingEl) loadingEl.style.display = 'none';
+        };
+        /* 加载超时兜底 */
+        addT(function () {
+            if (loadingEl) loadingEl.style.display = 'none';
+        }, 15000);
+
+        wrap.appendChild(iframe);
     }
 
     function closeFeishuForm() {
         const modal = document.getElementById('feishu-form-modal');
-        if (modal) modal.style.display = 'none';
+        if (!modal) return;
+        modal.style.display = 'none';
+
+        /* 移除 iframe，避免下次打开时显示缓存状态 */
+        const wrap = document.getElementById('feishu-iframe-wrap');
+        if (wrap) {
+            var oldIframe = wrap.querySelector('iframe');
+            if (oldIframe) oldIframe.remove();
+        }
+        /* 恢复加载提示 */
+        var loadingEl = document.getElementById('feishu-loading');
+        if (loadingEl) loadingEl.style.display = 'flex';
     }
 
     function buildEndTimelineGeometry() {
@@ -7682,6 +7751,14 @@
         /* 关闭可能打开的飞书表单弹窗 */
         var feishuModal = document.getElementById('feishu-form-modal');
         if (feishuModal) feishuModal.style.display = 'none';
+        /* 清除 iframe */
+        var wrap = document.getElementById('feishu-iframe-wrap');
+        if (wrap) {
+            var oldIframe = wrap.querySelector('iframe');
+            if (oldIframe) oldIframe.remove();
+        }
+        var loadingEl = document.getElementById('feishu-loading');
+        if (loadingEl) loadingEl.style.display = 'flex';
         if (n3) n3.style.opacity = '0';
         if (drop) {
             drop.classList.remove('end-drop-landed');
