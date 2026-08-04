@@ -379,68 +379,72 @@
             background: #606060;
             padding: 0;
             justify-content: flex-start;
-            overflow: hidden; /* Android: 显式限定高度，防止溢出 */
+            overflow: hidden; /* 固定单页，禁止整体滚动 */
         }
         #page-today-record .page-header {
-            position: relative; /* Android: 占据文档流，防止重叠 */
-            left: auto; /* 移除绝对定位的偏移 */
+            position: relative;
+            left: auto;
             right: auto;
-            width: 100%; /* 确保撑满宽度 */
+            width: 100%;
             flex-shrink: 0;
         }
         #page-today-record .today-subtitle {
-            font-size: 16px;
+            font-size: 15px;
             color: #D8D0BE;
             opacity: 0.7;
             text-align: center;
             letter-spacing: 0.12em;
-            padding: 0 24px 16px;
+            padding: 0 24px 8px;
             flex-shrink: 0;
         }
         .today-body {
             flex: 1;
-            min-height: 0; /* Android: 允许flex子元素收缩 */
-            overflow-y: auto;
-            padding: 0 24px 32px;
+            min-height: 0;
+            overflow: hidden; /* 固定单页，不允许滚动 */
+            padding: 0 24px 0;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 28px;
-            -webkit-overflow-scrolling: touch;
+            gap: 14px;
+            justify-content: space-evenly; /* 元素均匀分布 */
+        }
+        #page-today-record .today-save-wrap {
+            flex-shrink: 0;
+            padding-bottom: 12px;
         }
         /* 心情选择 */
         .today-mood-label {
-            font-size: 14px;
+            font-size: 13px;
             color: #D8D0BE;
             opacity: 0.6;
             letter-spacing: 0.12em;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-align: center;
         }
         .today-mood-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
         }
         .today-mood-opt {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            padding: 10px 12px;
+            gap: 2px;
+            padding: 6px 8px;
             border: 1.5px solid rgba(216,208,190,0.25);
             cursor: pointer;
             transition: all 0.25s ease;
             color: #D8D0BE;
             opacity: 0.5;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 0.06em;
             background: transparent;
-            min-width: 56px;
+            min-width: 48px;
         }
         .today-mood-opt .mood-emoji {
-            font-size: 26px;
+            font-size: 22px;
             line-height: 1;
         }
         .today-mood-opt.selected {
@@ -453,27 +457,27 @@
         }
         /* 事件分类 */
         .today-cat-label {
-            font-size: 14px;
+            font-size: 13px;
             color: #D8D0BE;
             opacity: 0.6;
             letter-spacing: 0.12em;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-align: center;
         }
         .today-cat-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         .today-cat-opt {
-            padding: 8px 18px;
+            padding: 6px 14px;
             border: 1.5px solid rgba(216,208,190,0.25);
             cursor: pointer;
             transition: all 0.25s ease;
             color: #D8D0BE;
             opacity: 0.5;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 0.06em;
             background: transparent;
         }
@@ -493,7 +497,8 @@
             width: 88%;
             margin: 0 auto;
             display: block;
-            min-height: 160px;
+            min-height: 80px;
+            max-height: 120px;
             background: rgba(0,0,0,0.10);
             border: 1.5px solid rgba(216,208,190,0.35);
             padding: 14px 16px;
@@ -518,14 +523,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             color: #D8D0BE;
             opacity: 0.5;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 0.08em;
+            flex-shrink: 0;
         }
         .today-time-row .time-icon {
-            font-size: 14px;
+            font-size: 12px;
             opacity: 0.6;
         }
         .today-time-row .time-text {
@@ -541,15 +547,16 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            padding-top: 8px;
+            padding: 8px 0 4px;
+            flex-shrink: 0;
         }
         .today-save-btn {
             width: 85%;
-            height: 48px;
+            height: 44px;
             background: #B3A38D;
             border: none;
             color: #D8D0BE;
-            font-size: 16px;
+            font-size: 15px;
             font-family: "Noto Serif SC", serif;
             letter-spacing: 0.15em;
             cursor: pointer;
@@ -3272,6 +3279,21 @@
         }
 
         .read3-text.read3-text--full .read3-para {
+            /* Android 基准：显式字体，不使用 background-clip:text（block 元素兼容性差） */
+            font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+            font-size: 20px;
+            line-height: 1.8;
+            letter-spacing: 0.08em;
+            color: #D8D0BE;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            -webkit-text-fill-color: unset;
+            animation: none;
+        }
+
+        .read3-text.read3-text--full .read3-flow-text {
+            /* 金色渐变仅在 inline <span> 上生效，Android/iOS 均可正确渲染 */
             background: linear-gradient(180deg, #D8D0BE 0%, #c9c0ad 45%, #B3A38D 100%);
             background-size: 100% 140%;
             -webkit-background-clip: text;
@@ -3279,8 +3301,6 @@
             color: transparent;
             -webkit-text-fill-color: transparent;
             animation: read3InkFlow 7.5s ease-in-out infinite;
-            line-height: 1.8;
-            letter-spacing: 0.08em;
         }
 
         .read3-text.read3-text--full .read3-para .read3-kw {
@@ -5223,7 +5243,7 @@
                 </div>
                 <!-- 内容记录 -->
                 <div class="today-textarea-wrap">
-                    <textarea class="today-textarea" id="today-textarea" placeholder="今天发生了什么？&#10;有没有一句话、一个瞬间、一件小事，值得以后重新看看？" rows="6" autocomplete="off"></textarea>
+                    <textarea class="today-textarea" id="today-textarea" placeholder="今天发生了什么？&#10;有没有一句话、一个瞬间、一件小事，值得以后重新看看？" rows="3" autocomplete="off"></textarea>
                 </div>
                 <!-- 时间管理 -->
                 <div class="today-time-row">
@@ -5231,10 +5251,10 @@
                     <span>记录时间：</span>
                     <span class="time-text" id="today-time-display"></span>
                 </div>
-                <!-- 保存按钮 -->
-                <div class="today-save-wrap">
-                    <button type="button" class="today-save-btn" id="today-save-btn">保存这一刻</button>
-                </div>
+            </div>
+            <!-- 保存按钮（固定在底部，不跟随内容滚动） -->
+            <div class="today-save-wrap">
+                <button type="button" class="today-save-btn" id="today-save-btn">保存这一刻</button>
             </div>
             <div class="today-success-overlay" id="today-success-overlay" style="display:none;">
                 <div class="check-icon">·</div>
@@ -5466,12 +5486,11 @@
         </div>
 
         <div id="feishu-form-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:#606060;">
-            <div style="height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#D8D0BE;border-bottom:1px solid rgba(255,255,255,.1);">
-                <div>感谢你的参与</div>
-                <button id="close-feishu-form" style="background:none;border:none;color:#D8D0BE;font-size:24px;cursor:pointer;">×</button>
-            </div>
-            <div id="feishu-iframe-wrap" style="width:100%;height:calc(100% - 60px);height:calc(100dvh - 60px);position:relative;">
-                <div id="feishu-loading" style="display:flex;align-items:center;justify-content:center;position:absolute;inset:0;color:#D8D0BE;opacity:0.4;font-size:14px;letter-spacing:0.08em;">问卷加载中...</div>
+            <button id="close-feishu-form" style="position:absolute;top:12px;right:16px;z-index:10;background:rgba(0,0,0,0.4);border:none;color:#D8D0BE;font-size:22px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+            <div id="feishu-iframe-wrap" style="width:100%;height:100%;height:100dvh;position:relative;">
+                <div id="feishu-loading" style="display:flex;align-items:center;justify-content:center;position:absolute;inset:0;z-index:5;pointer-events:none;">
+                    <span style="color:#D8D0BE;opacity:0.7;font-size:16px;letter-spacing:0.15em;background:rgba(0,0,0,0.2);padding:12px 24px;border-radius:6px;">问卷加载中...</span>
+                </div>
             </div>
         </div>
     </div>
@@ -5550,19 +5569,56 @@
     /* 翻牌音效 */
     const FLIP_AUDIO_SRC = './audio/翻牌定.mp3';
     let flipAudioCache = null;
+    let flipAudioUnlocked = false;
 
     function preloadFlipAudio() {
         try {
             flipAudioCache = new Audio(FLIP_AUDIO_SRC);
             flipAudioCache.preload = 'auto';
+            flipAudioCache.volume = 0.5;
+            flipAudioCache.playsInline = true;
+            /* iOS: 预加载并尝试静默播放解锁，失败由用户手势补解锁 */
+            flipAudioCache.load();
         } catch (e) { /* ignore */ }
+    }
+
+    function unlockFlipAudio() {
+        /* 在用户手势回调中调用，解锁 iOS audio 限制 */
+        if (flipAudioCache && !flipAudioUnlocked) {
+            try {
+                flipAudioCache.volume = 0.001;
+                var p = flipAudioCache.play();
+                if (p && p.then) {
+                    p.then(function () {
+                        flipAudioCache.pause();
+                        flipAudioCache.currentTime = 0;
+                        flipAudioCache.volume = 0.5;
+                        flipAudioUnlocked = true;
+                    }).catch(function () {});
+                } else {
+                    flipAudioCache.pause();
+                    flipAudioCache.currentTime = 0;
+                    flipAudioCache.volume = 0.5;
+                    flipAudioUnlocked = true;
+                }
+            } catch (e) {}
+        }
     }
 
     function playFlipSound() {
         try {
             if (flipAudioCache) {
                 flipAudioCache.currentTime = 0;
-                flipAudioCache.play().catch(function () {});
+                flipAudioCache.volume = 0.5;
+                var p = flipAudioCache.play();
+                if (p && p.then) {
+                    p.catch(function () {
+                        /* iOS fallback: 新建 Audio 元素直接播放 */
+                        var fresh = new Audio(FLIP_AUDIO_SRC);
+                        fresh.volume = 0.5;
+                        fresh.play().catch(function () {});
+                    });
+                }
             } else {
                 var a = new Audio(FLIP_AUDIO_SRC);
                 a.volume = 0.5;
@@ -7156,6 +7212,11 @@
             if (!alignSlotMap.every(function (v) { return v !== null; })) return;
             const btn = document.getElementById('align-start-btn');
             if (btn.classList.contains('loading')) return;
+            /* iOS: 在用户手势中暖机音频，确保后续翻牌音效可播放 */
+            unlockFlipAudio();
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume().catch(function () {});
+            }
             const labelDefault = '开始解读';
             btn.classList.add('loading');
             btn.textContent = '正在凝思…';
@@ -7211,21 +7272,21 @@
     }
 
     function read3ParaToHighlightedHtml(text) {
-        let s = read3EscapeHtml(text);
+        var s = read3EscapeHtml(text);
         s = s.replace(/看见/g, '<span class="read3-kw">看见</span>');
         s = s.replace(/希望/g, '<span class="read3-kw">希望</span>');
         s = s.replace(/真实/g, '<span class="read3-kw">真实</span>');
         s = s.replace(/退后一步/g, '<span class="read3-kw">退后一步</span>');
         s = s.replace(/熄灭的光/g, '熄灭的<span class="read3-kw">光</span>');
-        return s;
+        return '<span class="read3-flow-text">' + s + '</span>';
     }
 
     function read3FullHighlightedHtml() {
-        const pack = activePack || getActivePack();
-        const paras = pack.read3Paras;
-        const slots = ['st1', 'st2', 'st3', 'st4'];
+        var pack = activePack || getActivePack();
+        var paras = pack.read3Paras;
+        var slots = ['st1', 'st2', 'st3', 'st4'];
         return paras.map(function (line, idx) {
-            const slot = slots[Math.min(idx, slots.length - 1)];
+            var slot = slots[Math.min(idx, slots.length - 1)];
             return '<div class="read3-para read3-para--' + slot + ' read3-para--flow">' + read3ParaToHighlightedHtml(line) + '</div>';
         }).join('');
     }
@@ -7701,6 +7762,13 @@
         /* 恢复加载提示 */
         var loadingEl = document.getElementById('feishu-loading');
         if (loadingEl) loadingEl.style.display = 'flex';
+
+        /* 关闭问卷后返回首页 */
+        clearTimers();
+        stopArchiveBGM();
+        clearRead3Ambient();
+        TextRevealController.abort();
+        resetDemoToBrand();
     }
 
     function buildEndTimelineGeometry() {
@@ -7840,6 +7908,8 @@
     }
 
     function initReading() {
+        /* 暖机：确保 iOS 音频上下文已解锁（兜底） */
+        unlockFlipAudio();
         /* 进入解读页，背景音乐逐渐淡出 */
         fadeOutQueryBGM();
 
@@ -8143,6 +8213,8 @@
             if (localSkip) return;
             if (i >= activePack.read3Paras.length) {
                 wrap3.onclick = null;
+                /* 替换为统一格式的完整文本，确保 Android 字体渲染一致 */
+                t3.innerHTML = read3FullHighlightedHtml();
                 t3.classList.add('read3-breathe', 'read3-text--full');
                 flo.classList.add('read3-float-idle');
                 spot.classList.add('read3-spotlight--expand');
@@ -9641,7 +9713,9 @@
     var _longPressTimer = null;
 
     function renderTrajectoryWall() {
-        var records = loadAllRecords();
+        var allRecords = loadAllRecords();
+        /* 便利贴墙仅显示"今日记录"，不包含塔罗状态映照 */
+        var records = allRecords.filter(function (r) { return r.type === 'record'; });
         var container = document.getElementById('trajectory-wall-container');
         container.innerHTML = '';
 
@@ -9667,13 +9741,11 @@
             var weekStart = weekData.monday;
             var weekRecords = weekData.records;
             var rangeStr = formatWeekRange(weekStart);
-            var tarotCount = weekRecords.filter(function (r) { return r.type === 'tarot'; }).length;
-            var recordCount = weekRecords.filter(function (r) { return r.type === 'record'; }).length;
 
             html += '<div class="tw-week-block">';
             html += '<div class="tw-week-header">';
             html += '<span>' + rangeStr + '</span>';
-            html += '<span class="tw-week-range">' + tarotCount + '次映照 · ' + recordCount + '条记录</span>';
+            html += '<span class="tw-week-range">' + weekRecords.length + '条记录</span>';
             html += '</div>';
 
             /* 便利贴网格 */
@@ -9682,23 +9754,13 @@
             var sortedNotes = weekRecords.slice().sort(function (a, b) { return a.timestamp - b.timestamp; });
             sortedNotes.forEach(function (r) {
                 html += '<div class="tw-sticky-note" data-timestamp="' + r.timestamp + '" data-type="' + r.type + '">';
-                if (r.type === 'record') {
-                    var emoji = moodToEmoji(r.mood);
-                    html += '<div class="tw-note-top">';
-                    html += '<span class="tw-note-mood">' + emoji + '</span>';
-                    html += '<span class="tw-note-date">' + r.date + '</span>';
-                    html += '</div>';
-                    html += '<div class="tw-note-category">' + (r.category || '') + '</div>';
-                    html += '<div class="tw-note-content">' + escHtml(r.content || '') + '</div>';
-                } else {
-                    /* tarot记录 */
-                    html += '<div class="tw-note-top">';
-                    html += '<span class="tw-note-mood" style="font-size:14px;">✦</span>';
-                    html += '<span class="tw-note-date">' + r.date + '</span>';
-                    html += '</div>';
-                    html += '<div class="tw-note-category">状态映照</div>';
-                    html += '<div class="tw-note-content">' + escHtml(r.namingLabel || r.query || '塔罗解读') + '</div>';
-                }
+                var emoji = moodToEmoji(r.mood);
+                html += '<div class="tw-note-top">';
+                html += '<span class="tw-note-mood">' + emoji + '</span>';
+                html += '<span class="tw-note-date">' + r.date + '</span>';
+                html += '</div>';
+                html += '<div class="tw-note-category">' + (r.category || '') + '</div>';
+                html += '<div class="tw-note-content">' + escHtml(r.content || '') + '</div>';
                 html += '</div>';
             });
             html += '</div>'; /* .tw-sticky-grid */
@@ -9707,7 +9769,7 @@
 
         container.innerHTML = html;
 
-        /* 绑定点击事件 */
+        /* 绑定点击事件（仅用 record records 查找） */
         container.querySelectorAll('.tw-sticky-note').forEach(function (el) {
             var ts = parseInt(el.dataset.timestamp, 10);
             var record = records.find(function (r) { return r.timestamp === ts; });
