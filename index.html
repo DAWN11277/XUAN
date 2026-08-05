@@ -15,11 +15,20 @@
             --color-primary: #D8D0BE;
             --color-secondary: #B3A38D;
             --color-shadow: #916F56;
-            --color-bg-deep: color-mix(in srgb, var(--color-bg) 72%, black);
-            --mask-dark: color-mix(in srgb, black 20%, transparent);
-            --label-tint: color-mix(in srgb, var(--color-secondary) 10%, transparent);
-            --glow-soft: color-mix(in srgb, var(--color-secondary) 45%, transparent);
-            --glow-mid: color-mix(in srgb, var(--color-secondary) 35%, transparent);
+            --color-bg-deep: #454545;
+            --mask-dark: rgba(0, 0, 0, 0.20);
+            --label-tint: rgba(179, 163, 141, 0.10);
+            --glow-soft: rgba(179, 163, 141, 0.45);
+            --glow-mid: rgba(179, 163, 141, 0.35);
+            /* rgba 等价色，兼容不支持 color-mix() 的旧 Android WebView */
+            --card-border: rgba(216, 208, 190, 0.55);
+            --card-shadow: rgba(145, 111, 86, 0.35);
+            --card-inner-glow: rgba(216, 208, 190, 0.08);
+            --card-border-dim: rgba(216, 208, 190, 0.45);
+            --card-border-faint: rgba(216, 208, 190, 0.30);
+            --card-glow-light: rgba(179, 163, 141, 0.28);
+            --card-glow-strong: rgba(179, 163, 141, 0.50);
+            --card-glow-active: rgba(179, 163, 141, 0.65);
         }
 
         * {
@@ -208,7 +217,7 @@
             position: absolute;
             inset: 10px;
             border-radius: 50%;
-            background: radial-gradient(circle, color-mix(in srgb, var(--color-secondary) 55%, transparent) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(179, 163, 141, 0.55) 0%, transparent 70%);
             animation: ringBreath 2.8s ease-in-out infinite;
             pointer-events: none;
         }
@@ -2126,7 +2135,7 @@
         .direction-card {
             width: 85%;
             padding: 18px 16px;
-            border: 1px solid color-mix(in srgb, var(--color-primary) 60%, transparent);
+            border: 1.5px solid rgba(216, 208, 190, 0.60);
             display: flex;
             align-items: center;
             gap: 16px;
@@ -2141,7 +2150,7 @@
 
         .direction-card.selected {
             border-color: var(--color-secondary);
-            box-shadow: 0 4px 14px color-mix(in srgb, var(--color-shadow) 45%, transparent);
+            box-shadow: 0 4px 14px rgba(145, 111, 86, 0.45);
         }
 
         .direction-card.selected:not(:active) {
@@ -2454,9 +2463,9 @@
 
         @keyframes sealDown {
             0% { transform: translateY(-28px) scale(1.05); opacity: 0; }
-            55% { transform: translateY(4px) scale(0.96); opacity: 1; box-shadow: 0 0 28px var(--glow-soft), 0 10px 24px color-mix(in srgb, var(--color-shadow) 35%, transparent); }
+            55% { transform: translateY(4px) scale(0.96); opacity: 1; box-shadow: 0 0 28px var(--glow-soft), 0 10px 24px rgba(145, 111, 86, 0.35); }
             75% { transform: translateY(-2px) scale(1.02); }
-            100% { transform: translateY(0) scale(1); opacity: 1; box-shadow: 0 6px 20px color-mix(in srgb, var(--color-shadow) 40%, transparent); }
+            100% { transform: translateY(0) scale(1); opacity: 1; box-shadow: 0 6px 20px rgba(145, 111, 86, 0.40); }
         }
 
         .seal-anim {
@@ -2591,7 +2600,7 @@
             pointer-events: none;
             position: absolute;
             inset: 0;
-            background: color-mix(in srgb, var(--color-primary) 28%, transparent);
+            background: rgba(216, 208, 190, 0.28);
             opacity: 0;
             transition: opacity 0.15s ease;
             z-index: 0;
@@ -2949,7 +2958,7 @@
         #page-reading .reading-mini .tarot-card.reading-card-active {
             background-color: #B3A38D !important;
             opacity: 1 !important;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 14px color-mix(in srgb, #B3A38D 28%, transparent) !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 14px var(--card-glow-light) !important;
         }
 
         #page-reading .reading-mini .tarot-card.reading-card-lit {
@@ -2978,7 +2987,7 @@
             font-size: 22px !important;
             line-height: 1 !important;
             color: #B3A38D !important;
-            text-shadow: 0 0 10px color-mix(in srgb, #B3A38D 55%, transparent), 0 0 22px color-mix(in srgb, #B3A38D 25%, transparent) !important;
+            text-shadow: 0 0 10px rgba(179, 163, 141, 0.55), 0 0 22px rgba(179, 163, 141, 0.25) !important;
             animation: read1NextGlow 2.2s ease-in-out infinite alternate !important;
         }
 
@@ -3003,7 +3012,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            background: color-mix(in srgb, var(--color-bg) 88%, black);
+            background: #545454;
             cursor: pointer;
         }
 
@@ -3046,7 +3055,7 @@
         .read3-bg-ripple {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid color-mix(in srgb, #B3A38D 22%, transparent);
+            border: 1.5px solid rgba(179, 163, 141, 0.22);
             transform: translate(-50%, -50%) scale(0.2);
             opacity: 0;
             animation: read3BgRippleExpand 3.2s ease-out forwards;
@@ -3089,7 +3098,7 @@
         }
 
         .read3-stream {
-            stroke: color-mix(in srgb, #B3A38D 38%, transparent);
+            stroke: rgba(179, 163, 141, 0.38);
             stroke-width: 0.22;
             vector-effect: non-scaling-stroke;
             stroke-dasharray: 0.8 2.2;
@@ -3182,11 +3191,11 @@
         .read3-gold-ripple {
             position: absolute;
             border-radius: 50%;
-            border: 1.5px solid color-mix(in srgb, #B3A38D 75%, transparent);
+            border: 1.5px solid rgba(179, 163, 141, 0.75);
             transform: translate(-50%, -50%) scale(0.08);
             opacity: 0.95;
             animation: read3GoldRipple 1.05s ease-out forwards;
-            box-shadow: 0 0 12px color-mix(in srgb, #B3A38D 35%, transparent);
+            box-shadow: 0 0 12px rgba(179, 163, 141, 0.35);
         }
 
         @keyframes read3GoldRipple {
@@ -3251,13 +3260,13 @@
         }
 
         .interpret-final.read3-text .read3-para > .reveal-char.read3-mist-char {
-            background: linear-gradient(120deg, #D8D0BE 0%, #c9c0ad 35%, #B3A38D 55%, #D8D0BE 88%, #B3A38D 100%);
-            background-size: 220% 180%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            animation: read3MistChar 0.62s cubic-bezier(0.25, 0.85, 0.35, 1) forwards, read3InkFlow 7.5s ease-in-out infinite;
+            /* 使用实色避免部分 Android 上 background-clip:text 失效 */
+            color: #D8D0BE;
+            -webkit-text-fill-color: #D8D0BE;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            animation: read3MistChar 0.62s cubic-bezier(0.25, 0.85, 0.35, 1) forwards;
         }
 
         @keyframes read3MistChar {
@@ -3279,7 +3288,7 @@
         }
 
         .read3-text.read3-text--full .read3-para {
-            /* Android 基准：显式字体，不使用 background-clip:text（block 元素兼容性差） */
+            /* 统一字体样式，所有 Android 设备一致 */
             font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
             font-size: 20px;
             line-height: 1.8;
@@ -3293,14 +3302,13 @@
         }
 
         .read3-text.read3-text--full .read3-flow-text {
-            /* 金色渐变仅在 inline <span> 上生效，Android/iOS 均可正确渲染 */
-            background: linear-gradient(180deg, #D8D0BE 0%, #c9c0ad 45%, #B3A38D 100%);
-            background-size: 100% 140%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            animation: read3InkFlow 7.5s ease-in-out infinite;
+            /* 使用实色，避免 background-clip:text 在部分 Android 上失效 */
+            color: #D8D0BE;
+            -webkit-text-fill-color: #D8D0BE;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            animation: none;
         }
 
         .read3-text.read3-text--full .read3-para .read3-kw {
@@ -3359,10 +3367,10 @@
             width: 2px;
             height: 2px;
             border-radius: 50%;
-            background: color-mix(in srgb, #D8D0BE 70%, transparent);
+            background: rgba(216, 208, 190, 0.70);
             pointer-events: none;
             animation: read3DotFall 1.4s ease-in forwards;
-            box-shadow: 0 0 4px color-mix(in srgb, #B3A38D 40%, transparent);
+            box-shadow: 0 0 4px rgba(179, 163, 141, 0.40);
         }
 
         @keyframes read3DotFall {
@@ -3534,7 +3542,7 @@
             width: 100%;
             height: 120px;
             padding: 14px 16px;
-            border: 1px solid color-mix(in srgb, #D8D0BE 40%, transparent);
+            border: 1.5px solid rgba(216, 208, 190, 0.40);
             background: rgba(0, 0, 0, 0.15);
             color: #D8D0BE;
             font-family: "Noto Serif SC", serif;
@@ -3619,7 +3627,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: radial-gradient(circle, color-mix(in srgb, #B3A38D 15%, transparent) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(179, 163, 141, 0.15) 0%, transparent 70%);
             opacity: 0;
             pointer-events: none;
             z-index: 0;
@@ -3665,7 +3673,7 @@
         }
         .draw-slot-base.reveal {
             opacity: 0.5;
-            box-shadow: inset 0 0 12px color-mix(in srgb, #B3A38D 5%, transparent);
+            box-shadow: inset 0 0 12px rgba(179, 163, 141, 0.05);
         }
 
         /* 引导文案 */
@@ -3773,7 +3781,7 @@
 
         .arc-card.highlight {
             border-color: #B3A38D !important;
-            box-shadow: 0 0 14px color-mix(in srgb, #B3A38D 50%, transparent), inset 0 0 8px color-mix(in srgb, #B3A38D 20%, transparent);
+            box-shadow: 0 0 14px rgba(179, 163, 141, 0.50), inset 0 0 8px rgba(179, 163, 141, 0.20);
         }
 
         .arc-card.picked {
@@ -3788,8 +3796,8 @@
         /* 牌背纹理 */
         .tarot-back {
             background: #606060;
-            border: 1px solid color-mix(in srgb, #D8D0BE 55%, transparent);
-            box-shadow: 0 4px 12px color-mix(in srgb, #916F56 35%, transparent), inset 0 1px 0 color-mix(in srgb, #D8D0BE 8%, transparent);
+            border: 1.5px solid var(--card-border);
+            box-shadow: 0 4px 12px var(--card-shadow), inset 0 1px 0 var(--card-inner-glow);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -3849,10 +3857,10 @@
         }
         .draw-slot-base.reveal {
             opacity: 0.5;
-            box-shadow: inset 0 0 12px color-mix(in srgb, #B3A38D 5%, transparent);
+            box-shadow: inset 0 0 12px rgba(179, 163, 141, 0.05);
         }
         .draw-slot-base.pop {
-            box-shadow: inset 0 0 20px color-mix(in srgb, #B3A38D 20%, transparent), 0 0 12px color-mix(in srgb, #B3A38D 15%, transparent);
+            box-shadow: inset 0 0 20px rgba(179, 163, 141, 0.20), 0 0 12px rgba(179, 163, 141, 0.15);
         }
 
         .draw-slot-card {
@@ -3897,8 +3905,8 @@
         }
 
         @keyframes btnPulseGlow {
-            0%, 100% { box-shadow: 0 0 6px color-mix(in srgb, #B3A38D 20%, transparent); }
-            50% { box-shadow: 0 0 16px color-mix(in srgb, #B3A38D 50%, transparent); }
+            0%, 100% { box-shadow: 0 0 6px rgba(179, 163, 141, 0.20); }
+            50% { box-shadow: 0 0 16px rgba(179, 163, 141, 0.50); }
         }
 
         /* ---------- 第四阶段 Page2：阵位匹配 ---------- */
@@ -3939,8 +3947,8 @@
         }
 
         @keyframes alignGlowBreath {
-            0%, 100% { box-shadow: 0 0 8px color-mix(in srgb, #B3A38D 35%, transparent); }
-            50% { box-shadow: 0 0 16px color-mix(in srgb, #B3A38D 65%, transparent); }
+            0%, 100% { box-shadow: 0 0 8px rgba(179, 163, 141, 0.35); }
+            50% { box-shadow: 0 0 16px rgba(179, 163, 141, 0.65); }
         }
 
         .align-slot-card.swap-fly {
@@ -3982,7 +3990,7 @@
             align-items: center;
             justify-content: center;
             background: #606060;
-            border: 1px solid color-mix(in srgb, #D8D0BE 55%, transparent);
+            border: 1.5px solid var(--card-border);
         }
 
         #page-reading .reading-card-back-face .back-pattern {
@@ -3994,7 +4002,7 @@
         #page-reading .reading-card-front-face {
             transform: rotateY(180deg);
             background: #606060;
-            border: 1px solid color-mix(in srgb, #D8D0BE 45%, transparent);
+            border: 1.5px solid var(--card-border-dim);
             display: flex;
             flex-direction: column;
             align-items: stretch;
@@ -4116,7 +4124,7 @@
         .align-slot {
             width: 56px;
             height: 89px;
-            border: 1px solid color-mix(in srgb, #D8D0BE 30%, transparent);
+            border: 1.5px solid var(--card-border-faint);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -5486,11 +5494,15 @@
         </div>
 
         <div id="feishu-form-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:#606060;">
-            <button id="close-feishu-form" style="position:absolute;top:12px;right:16px;z-index:10;background:rgba(0,0,0,0.4);border:none;color:#D8D0BE;font-size:22px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+            <button id="close-feishu-form" style="display:none;position:absolute;top:12px;right:16px;z-index:10;background:rgba(0,0,0,0.4);border:none;color:#D8D0BE;font-size:22px;width:32px;height:32px;border-radius:50%;cursor:pointer;align-items:center;justify-content:center;">×</button>
             <div id="feishu-iframe-wrap" style="width:100%;height:100%;height:100dvh;position:relative;">
                 <div id="feishu-loading" style="display:flex;align-items:center;justify-content:center;position:absolute;inset:0;z-index:5;pointer-events:none;">
                     <span style="color:#D8D0BE;opacity:0.7;font-size:16px;letter-spacing:0.15em;background:rgba(0,0,0,0.2);padding:12px 24px;border-radius:6px;">问卷加载中...</span>
                 </div>
+            </div>
+            <!-- 提交完成后出现的返回首页按钮 -->
+            <div id="feishu-done-bar" style="display:none;position:absolute;bottom:0;left:0;right:0;z-index:10;padding:16px 24px;text-align:center;background:linear-gradient(0deg,rgba(96,96,96,0.95) 0%,rgba(96,96,96,0.7) 70%,transparent 100%);">
+                <button id="feishu-done-btn" style="background:#B3A38D;border:none;color:#D8D0BE;font-family:'Noto Serif SC',serif;font-size:15px;letter-spacing:0.15em;padding:10px 36px;cursor:pointer;">返回首页</button>
             </div>
         </div>
     </div>
@@ -5569,7 +5581,6 @@
     /* 翻牌音效 */
     const FLIP_AUDIO_SRC = './audio/翻牌定.mp3';
     let flipAudioCache = null;
-    let flipAudioUnlocked = false;
 
     function preloadFlipAudio() {
         try {
@@ -5577,52 +5588,35 @@
             flipAudioCache.preload = 'auto';
             flipAudioCache.volume = 0.5;
             flipAudioCache.playsInline = true;
-            /* iOS: 预加载并尝试静默播放解锁，失败由用户手势补解锁 */
             flipAudioCache.load();
         } catch (e) { /* ignore */ }
     }
 
     function unlockFlipAudio() {
-        /* 在用户手势回调中调用，解锁 iOS audio 限制 */
-        if (flipAudioCache && !flipAudioUnlocked) {
-            try {
-                flipAudioCache.volume = 0.001;
-                var p = flipAudioCache.play();
-                if (p && p.then) {
-                    p.then(function () {
-                        flipAudioCache.pause();
-                        flipAudioCache.currentTime = 0;
-                        flipAudioCache.volume = 0.5;
-                        flipAudioUnlocked = true;
-                    }).catch(function () {});
-                } else {
-                    flipAudioCache.pause();
-                    flipAudioCache.currentTime = 0;
-                    flipAudioCache.volume = 0.5;
-                    flipAudioUnlocked = true;
-                }
-            } catch (e) {}
-        }
+        /* iOS 音频系统暖机：在用户手势回调中以极低音量播放，解除 iOS 的音频播放限制 */
+        try {
+            var a = new Audio(FLIP_AUDIO_SRC);
+            a.volume = 0.001;
+            var p = a.play();
+            if (p && p.then) {
+                p.then(function () {
+                    a.pause();
+                    a.currentTime = 0;
+                }).catch(function () {});
+            }
+        } catch (e) {}
     }
 
     function playFlipSound() {
+        /* iOS 最可靠方案：每次调用都创建全新 Audio 元素，不复用缓存 */
         try {
-            if (flipAudioCache) {
-                flipAudioCache.currentTime = 0;
-                flipAudioCache.volume = 0.5;
-                var p = flipAudioCache.play();
-                if (p && p.then) {
-                    p.catch(function () {
-                        /* iOS fallback: 新建 Audio 元素直接播放 */
-                        var fresh = new Audio(FLIP_AUDIO_SRC);
-                        fresh.volume = 0.5;
-                        fresh.play().catch(function () {});
-                    });
-                }
-            } else {
-                var a = new Audio(FLIP_AUDIO_SRC);
-                a.volume = 0.5;
-                a.play().catch(function () {});
+            var a = new Audio(FLIP_AUDIO_SRC);
+            a.volume = 0.5;
+            var p = a.play();
+            if (p && p.then) {
+                p.catch(function () {
+                    /* 部分安卓在非用户手势下也会拒绝，静默忽略 */
+                });
             }
         } catch (e) { /* ignore */ }
     }
@@ -6584,7 +6578,7 @@
         var fromR = fromEl.getBoundingClientRect();
 
         var ghost = document.createElement('div');
-        ghost.style.cssText = 'position:fixed;left:' + fromR.left + 'px;top:' + fromR.top + 'px;width:' + fromR.width + 'px;height:' + fromR.height + 'px;border:1px solid color-mix(in srgb, #D8D0BE 20%, transparent);opacity:0.3;pointer-events:none;z-index:50;transition:opacity 0.2s ease;';
+        ghost.style.cssText = 'position:fixed;left:' + fromR.left + 'px;top:' + fromR.top + 'px;width:' + fromR.width + 'px;height:' + fromR.height + 'px;border:1.5px solid rgba(216,208,190,0.20);opacity:0.3;pointer-events:none;z-index:50;transition:opacity 0.2s ease;';
         document.body.appendChild(ghost);
         addT(function () {
             ghost.style.opacity = '0';
@@ -7721,6 +7715,12 @@
         var oldIframe = wrap.querySelector('iframe');
         if (oldIframe) oldIframe.remove();
 
+        /* 隐藏关闭按钮和返回栏 */
+        var closeBtn = document.getElementById('close-feishu-form');
+        var doneBar = document.getElementById('feishu-done-bar');
+        if (closeBtn) closeBtn.style.display = 'none';
+        if (doneBar) doneBar.style.display = 'none';
+
         /* 显示加载状态 */
         var loadingEl = document.getElementById('feishu-loading');
         if (loadingEl) loadingEl.style.display = 'flex';
@@ -7730,20 +7730,55 @@
         var baseUrl = 'https://bcncjae7suqa.feishu.cn/share/base/form/shrcnwZ41orLvWgsm4hpmgXoOce';
         iframe.src = baseUrl + (baseUrl.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now();
         iframe.style.cssText = 'width:100%;height:100%;border:none;position:relative;z-index:1;';
-        /* Android 兼容：sandbox 允许表单提交和脚本 */
         iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation');
         iframe.setAttribute('allow', 'camera;microphone;geolocation');
         iframe.setAttribute('loading', 'eager');
         iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
 
-        /* iframe 加载完成后隐藏 loading */
+        /* 跟踪 iframe 加载次数，第二次加载即为表单提交成功 */
+        var loadCount = 0;
+        var formSubmitted = false;
+
+        function onFormSubmitted() {
+            if (formSubmitted) return;
+            formSubmitted = true;
+            if (closeBtn) closeBtn.style.display = 'flex';
+            if (doneBar) doneBar.style.display = 'block';
+        }
+
         iframe.onload = function () {
+            loadCount++;
             if (loadingEl) loadingEl.style.display = 'none';
+            /* 第二次及之后的 onload 通常是表单提交后的跳转 */
+            if (loadCount >= 2) onFormSubmitted();
         };
+
+        /* 监听 postMessage（飞书表单提交后可能发送消息） */
+        var msgHandler = function (e) {
+            var data = e.data;
+            if (!data) return;
+            /* 飞书表单提交通知 */
+            if (typeof data === 'object' && (data.type === 'form_submitted' || data.type === 'submit' || data.event === 'submit')) {
+                onFormSubmitted();
+            }
+            if (typeof data === 'string' && (data.indexOf('submit') >= 0 || data.indexOf('success') >= 0)) {
+                onFormSubmitted();
+            }
+        };
+        window.addEventListener('message', msgHandler, false);
+
         /* 加载超时兜底 */
         addT(function () {
             if (loadingEl) loadingEl.style.display = 'none';
-        }, 15000);
+            /* 20 秒后仍未检测到提交，允许用户关闭（兜底） */
+            if (!formSubmitted) onFormSubmitted();
+        }, 20000);
+
+        /* 清理旧的 message 监听器（避免重复绑定） */
+        if (wrap._msgHandler) {
+            window.removeEventListener('message', wrap._msgHandler, false);
+        }
+        wrap._msgHandler = msgHandler;
 
         wrap.appendChild(iframe);
     }
@@ -7758,17 +7793,51 @@
         if (wrap) {
             var oldIframe = wrap.querySelector('iframe');
             if (oldIframe) oldIframe.remove();
+            /* 清理 message 监听 */
+            if (wrap._msgHandler) {
+                window.removeEventListener('message', wrap._msgHandler, false);
+                wrap._msgHandler = null;
+            }
         }
         /* 恢复加载提示 */
         var loadingEl = document.getElementById('feishu-loading');
         if (loadingEl) loadingEl.style.display = 'flex';
+        /* 隐藏关闭按钮和返回栏 */
+        var closeBtn = document.getElementById('close-feishu-form');
+        var doneBar = document.getElementById('feishu-done-bar');
+        if (closeBtn) closeBtn.style.display = 'none';
+        if (doneBar) doneBar.style.display = 'none';
 
-        /* 关闭问卷后返回首页 */
+        /* 清空会话状态，返回首页 */
         clearTimers();
         stopArchiveBGM();
         clearRead3Ambient();
         TextRevealController.abort();
-        resetDemoToBrand();
+        reviewRestore = null;
+        readingNavLayer = 1;
+        archivePhase = 'emotional';
+        read3RippleCounter = 0;
+        emotionalBridgeSeq += 1;
+        namingSeq += 1;
+        endSeq += 1;
+        userQuery = '';
+        drawnCards = [];
+        alignSlotMap = [null, null, null];
+        selectedDirection = '事业学业';
+        global_consensus_name = '';
+        aiInsight = '';
+        clearSessionReading();
+        resetEndScreenUI();
+        var emotional = document.getElementById('archive-emotional');
+        var naming = document.getElementById('archive-naming');
+        if (emotional) emotional.classList.remove('hidden');
+        if (naming) naming.classList.add('hidden');
+        var finish = document.getElementById('end-finish-btn');
+        if (finish) {
+            finish.classList.remove('end-finish-visible');
+            finish.onclick = null;
+        }
+        goToPage('page-welcome', 'fade');
     }
 
     function buildEndTimelineGeometry() {
@@ -10404,6 +10473,8 @@
         document.getElementById('end-back-btn').onclick = phaseBackFromEnd;
         var closeBtn = document.getElementById('close-feishu-form');
         if (closeBtn) closeBtn.onclick = closeFeishuForm;
+        var doneBtn = document.getElementById('feishu-done-btn');
+        if (doneBtn) doneBtn.onclick = closeFeishuForm;
         onEnter('page-welcome');
     });
 })();
