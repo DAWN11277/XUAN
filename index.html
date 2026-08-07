@@ -10142,6 +10142,21 @@
             addT(function () {
                 var html = renderTabContent(tabId);
                 contentEl.innerHTML = html;
+                /* 绑定空状态按钮（IIFE内 onclick 无法访问闭包变量，改用 JS 事件绑定） */
+                var gotoRecordBtn = document.getElementById('wd-goto-record-btn');
+                if (gotoRecordBtn) {
+                    gotoRecordBtn.onclick = function () {
+                        clearTimers();
+                        _todayRecordFrom = 'page-trajectory';
+                        goToPage('page-today-record', 'fade');
+                    };
+                }
+                var gotoDirectionBtn = document.getElementById('wd-goto-direction-btn');
+                if (gotoDirectionBtn) {
+                    gotoDirectionBtn.onclick = function () {
+                        goToPage('page-direction', 'fade');
+                    };
+                }
                 void contentEl.offsetWidth;
                 contentEl.style.opacity = '1';
             }, 200);
@@ -10205,7 +10220,7 @@
                     h += '<div class="wd-empty-text">\u8FD9\u4E00\u5468\uFF0C\u6CA1\u6709\u7559\u4E0B\u4EFB\u4F55\u5171\u8BC6\u3002</div>';
                 } else {
                     h += '<div class="wd-empty-text">\u672C\u5468\u8FD8\u6CA1\u6709\u7559\u4E0B\u4EFB\u4F55\u5171\u8BC6\u8BB0\u5F55\u3002<br>\u53BB\u9996\u9875\u8BD5\u8BD5\u2018\u72B6\u6001\u6620\u7167\u2019\u5427\u3002</div>';
-                    h += '<button class="wd-empty-btn" onclick="goToPage(\'page-direction\', \'fade\')">\u53BB\u6620\u7167</button>';
+                    h += '<button class="wd-empty-btn" id="wd-goto-direction-btn">\u53BB\u6620\u7167</button>';
                 }
                 h += '</div>';
             } else {
@@ -10245,8 +10260,8 @@
                 if (isComplete && consensusName) {
                     h += '<div class="wd-empty-text">\u8FD9\u4E00\u5468\uFF0C\u6CA1\u6709\u7559\u4E0B\u4EFB\u4F55\u7247\u6BB5\u3002</div>';
                 } else {
-                    h += '<div class="wd-empty-text">\u672C\u5468\u8FD8\u6CA1\u6709\u7559\u4E0B\u4EFB\u4F55\u8BB0\u5F55\u3002<br>\u53BB\u9996\u9875\u8BD5\u8BD5\u2018\u4ECA\u65E5\u8BB0\u5F55\u2019\u5427\u3002</div>';
-                    h += '<button class="wd-empty-btn" onclick="goToPage(\'page-welcome\', \'fade\')">\u53BB\u8BB0\u5F55</button>';
+                    h += '<div class="wd-empty-text">\u672C\u5468\u8FD8\u6CA1\u6709\u7559\u4E0B\u4EFB\u4F55\u8BB0\u5F55\u3002</div>';
+                    h += '<button class="wd-empty-btn" id="wd-goto-record-btn">\u53BB\u8BB0\u5F55</button>';
                 }
                 h += '</div>';
             } else {
